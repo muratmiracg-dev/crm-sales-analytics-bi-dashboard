@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Report",
+    "displayName": "CRM Sales Analytics"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "7f9ae6ee-42bd-4f83-bc5f-b351652d01ba"
+  }
+}

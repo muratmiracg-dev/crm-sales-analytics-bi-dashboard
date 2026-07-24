@@ -1,0 +1,1126 @@
+{
+  "compatibilityLevel": 1600,
+  "model": {
+    "annotations": [
+      {
+        "name": "PBI_QueryOrder",
+        "value": "[\"Calendar\",\"crm_monthly\",\"crm_rep_performance\",\"crm_lead_sources\",\"Funnel Stages\"]"
+      },
+      {
+        "name": "__PBI_TimeIntelligenceEnabled",
+        "value": "1"
+      },
+      {
+        "name": "PBI_ProTooling",
+        "value": "[\"DevMode\"]"
+      }
+    ],
+    "culture": "en-US",
+    "dataAccessOptions": {
+      "legacyRedirects": true,
+      "returnErrorValuesAsNull": true
+    },
+    "defaultPowerBIDataSourceVersion": "powerBI_V3",
+    "relationships": [
+      {
+        "name": "496cb188beb22a628f79",
+        "fromColumn": "Month",
+        "fromTable": "crm_monthly",
+        "toColumn": "Date",
+        "toTable": "Calendar"
+      },
+      {
+        "name": "3d7366c71e41f6b0d9ac",
+        "fromColumn": "Month",
+        "fromTable": "crm_rep_performance",
+        "toColumn": "Date",
+        "toTable": "Calendar"
+      },
+      {
+        "name": "1ca75817859514409363",
+        "fromColumn": "Month",
+        "fromTable": "crm_lead_sources",
+        "toColumn": "Date",
+        "toTable": "Calendar"
+      },
+      {
+        "name": "f0df8eda-73ad-462e-8aa4-89cfd78d66c8",
+        "fromColumn": "Date",
+        "fromTable": "Calendar",
+        "joinOnDateBehavior": "datePartOnly",
+        "toColumn": "Date",
+        "toTable": "LocalDateTable_99b32573-cb39-4774-abef-496ce28b6542"
+      }
+    ],
+    "sourceQueryCulture": "en-US",
+    "tables": [
+      {
+        "name": "Calendar",
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "mmm yyyy",
+            "lineageTag": "50ad1436-d914-489e-8c87-29b228320fe7",
+            "sourceColumn": "Date",
+            "summarizeBy": "none",
+            "variations": [
+              {
+                "name": "Varyasyon",
+                "defaultHierarchy": {
+                  "hierarchy": "Date Hierarchy",
+                  "table": "LocalDateTable_99b32573-cb39-4774-abef-496ce28b6542"
+                },
+                "isDefault": true,
+                "relationship": "f0df8eda-73ad-462e-8aa4-89cfd78d66c8"
+              }
+            ]
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "6c56c61b-34b5-465b-8748-1c21500fabc4",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month Key",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "string",
+            "lineageTag": "7835d159-65d7-4067-b873-1906fffe9f74",
+            "sourceColumn": "Month Key",
+            "summarizeBy": "none"
+          }
+        ],
+        "lineageTag": "2a5031d2-1b6a-4320-a596-0622366d1f42",
+        "partitions": [
+          {
+            "name": "Calendar",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Binary = Binary.FromText(\"RGF0ZSxNb250aCxNb250aCBLZXkKMjAyNC0wMS0wMSxKYW4gMjAyNCwyMDI0LTAxCjIwMjQtMDItMDEsRmViIDIwMjQsMjAyNC0wMgoyMDI0LTAzLTAxLE1hciAyMDI0LDIwMjQtMDMKMjAyNC0wNC0wMSxBcHIgMjAyNCwyMDI0LTA0CjIwMjQtMDUtMDEsTWF5IDIwMjQsMjAyNC0wNQoyMDI0LTA2LTAxLEp1biAyMDI0LDIwMjQtMDYKMjAyNC0wNy0wMSxKdWwgMjAyNCwyMDI0LTA3CjIwMjQtMDgtMDEsQXVnIDIwMjQsMjAyNC0wOAoyMDI0LTA5LTAxLFNlcCAyMDI0LDIwMjQtMDkKMjAyNC0xMC0wMSxPY3QgMjAyNCwyMDI0LTEwCjIwMjQtMTEtMDEsTm92IDIwMjQsMjAyNC0xMQoyMDI0LTEyLTAxLERlYyAyMDI0LDIwMjQtMTIKMjAyNS0wMS0wMSxKYW4gMjAyNSwyMDI1LTAxCjIwMjUtMDItMDEsRmViIDIwMjUsMjAyNS0wMgoyMDI1LTAzLTAxLE1hciAyMDI1LDIwMjUtMDMKMjAyNS0wNC0wMSxBcHIgMjAyNSwyMDI1LTA0CjIwMjUtMDUtMDEsTWF5IDIwMjUsMjAyNS0wNQoyMDI1LTA2LTAxLEp1biAyMDI1LDIwMjUtMDYKMjAyNS0wNy0wMSxKdWwgMjAyNSwyMDI1LTA3CjIwMjUtMDgtMDEsQXVnIDIwMjUsMjAyNS0wOAoyMDI1LTA5LTAxLFNlcCAyMDI1LDIwMjUtMDkKMjAyNS0xMC0wMSxPY3QgMjAyNSwyMDI1LTEwCjIwMjUtMTEtMDEsTm92IDIwMjUsMjAyNS0xMQoyMDI1LTEyLTAxLERlYyAyMDI1LDIwMjUtMTIKMjAyNi0wMS0wMSxKYW4gMjAyNiwyMDI2LTAxCjIwMjYtMDItMDEsRmViIDIwMjYsMjAyNi0wMgoyMDI2LTAzLTAxLE1hciAyMDI2LDIwMjYtMDMKMjAyNi0wNC0wMSxBcHIgMjAyNiwyMDI2LTA0CjIwMjYtMDUtMDEsTWF5IDIwMjYsMjAyNi0wNQoyMDI2LTA2LTAxLEp1biAyMDI2LDIwMjYtMDYKMjAyNi0wNy0wMSxKdWwgMjAyNiwyMDI2LTA3CjIwMjYtMDgtMDEsQXVnIDIwMjYsMjAyNi0wOAoyMDI2LTA5LTAxLFNlcCAyMDI2LDIwMjYtMDkKMjAyNi0xMC0wMSxPY3QgMjAyNiwyMDI2LTEwCjIwMjYtMTEtMDEsTm92IDIwMjYsMjAyNi0xMQoyMDI2LTEyLTAxLERlYyAyMDI2LDIwMjYtMTIK\", BinaryEncoding.Base64),",
+                "    Source = Csv.Document(Binary, [Delimiter=\",\", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"Date\", type date}, {\"Month\", type text}, {\"Month Key\", type text}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "crm_monthly",
+        "columns": [
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "mmm yyyy",
+            "lineageTag": "9d947a0e-4e5f-4ae3-b571-9f9a71ad7d78",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month Key",
+            "dataType": "string",
+            "lineageTag": "65581dbf-a301-4427-9108-14139e447807",
+            "sourceColumn": "Month Key"
+          },
+          {
+            "name": "New Leads",
+            "dataType": "int64",
+            "lineageTag": "6caab2aa-ebba-4da1-9577-e71970601db2",
+            "sourceColumn": "New Leads"
+          },
+          {
+            "name": "Lead Target",
+            "dataType": "int64",
+            "lineageTag": "ef8e7b95-76ed-426f-ba97-f9759bdaf99b",
+            "sourceColumn": "Lead Target"
+          },
+          {
+            "name": "Qualified Leads",
+            "dataType": "int64",
+            "lineageTag": "1225f258-8f55-4f87-9934-2fc93dd31a2c",
+            "sourceColumn": "Qualified Leads"
+          },
+          {
+            "name": "Opportunities",
+            "dataType": "int64",
+            "lineageTag": "7ead4f65-3bc7-4373-a163-8c5b17fe8d06",
+            "sourceColumn": "Opportunities"
+          },
+          {
+            "name": "Won Deals",
+            "dataType": "int64",
+            "lineageTag": "5bda132a-9b99-459f-b926-26b9a9d0c7d7",
+            "sourceColumn": "Won Deals"
+          },
+          {
+            "name": "Average Deal Size",
+            "dataType": "double",
+            "lineageTag": "bf0804a1-826b-41ea-a55a-30c9c54bafd1",
+            "sourceColumn": "Average Deal Size"
+          },
+          {
+            "name": "Won Revenue",
+            "dataType": "double",
+            "lineageTag": "ab555b1a-11b9-4a45-a21a-f1fd585d26b0",
+            "sourceColumn": "Won Revenue"
+          },
+          {
+            "name": "Revenue Target",
+            "dataType": "double",
+            "lineageTag": "d60171d6-37ef-4c72-9b0f-f8b044014ad9",
+            "sourceColumn": "Revenue Target"
+          },
+          {
+            "name": "Pipeline Value",
+            "dataType": "double",
+            "lineageTag": "f67fb2c8-0b67-4359-943f-6393f23744e0",
+            "sourceColumn": "Pipeline Value"
+          },
+          {
+            "name": "Sales Cycle Days",
+            "dataType": "int64",
+            "lineageTag": "84179e31-bb36-45f1-961d-8887ac6c594a",
+            "sourceColumn": "Sales Cycle Days"
+          },
+          {
+            "name": "New Customers",
+            "dataType": "int64",
+            "lineageTag": "34ee5c13-991d-4bc3-98bc-f1b78f141702",
+            "sourceColumn": "New Customers"
+          },
+          {
+            "name": "Churn Rate",
+            "dataType": "double",
+            "lineageTag": "4052493d-cd30-4020-81ac-2e9b25d7b198",
+            "sourceColumn": "Churn Rate"
+          },
+          {
+            "name": "Lead Qualification Rate",
+            "dataType": "double",
+            "lineageTag": "f55db29e-44ad-4efb-adc3-fb683d4cab3c",
+            "sourceColumn": "Lead Qualification Rate"
+          },
+          {
+            "name": "Opportunity Conversion",
+            "dataType": "double",
+            "lineageTag": "65c799b4-5ece-48db-9cf7-50e2d456addb",
+            "sourceColumn": "Opportunity Conversion"
+          },
+          {
+            "name": "Win Rate",
+            "dataType": "double",
+            "lineageTag": "1bb8a140-cf59-40db-8728-5bcf772323a2",
+            "sourceColumn": "Win Rate"
+          },
+          {
+            "name": "Target Attainment",
+            "dataType": "double",
+            "lineageTag": "708090c9-dd97-4425-a024-76c3a10aaff8",
+            "sourceColumn": "Target Attainment"
+          }
+        ],
+        "lineageTag": "649a7ae8-58b8-4652-80c7-77dfd751bf25",
+        "measures": [
+          {
+            "name": "KPI New Leads",
+            "expression": "SUM(crm_monthly[New Leads])",
+            "formatString": "#,0",
+            "lineageTag": "58e08717-7d4d-42f4-9c79-b6cc6b512871"
+          },
+          {
+            "name": "KPI Lead Target",
+            "expression": "SUM(crm_monthly[Lead Target])",
+            "formatString": "#,0",
+            "lineageTag": "0d890b73-f2ec-4ed2-9f4d-859d43f0f9ee"
+          },
+          {
+            "name": "KPI Qualified Leads",
+            "expression": "SUM(crm_monthly[Qualified Leads])",
+            "formatString": "#,0",
+            "lineageTag": "3be021ff-4c05-4335-9469-aff97e55bf58"
+          },
+          {
+            "name": "KPI Opportunities",
+            "expression": "SUM(crm_monthly[Opportunities])",
+            "formatString": "#,0",
+            "lineageTag": "e8f02529-76b5-44b7-9f7d-0aecf018b2fe"
+          },
+          {
+            "name": "KPI Won Deals",
+            "expression": "SUM(crm_monthly[Won Deals])",
+            "formatString": "#,0",
+            "lineageTag": "8e3878d9-4047-419b-ad3f-ebef0b4a8ff0"
+          },
+          {
+            "name": "KPI Won Revenue",
+            "expression": "SUM(crm_monthly[Won Revenue])",
+            "formatString": "₺#,0",
+            "lineageTag": "b82844ba-37f8-43d8-8fde-ab7c913755eb"
+          },
+          {
+            "name": "KPI Revenue Target",
+            "expression": "SUM(crm_monthly[Revenue Target])",
+            "formatString": "₺#,0",
+            "lineageTag": "be9f2f62-6865-43bd-bcbf-855500518ad8"
+          },
+          {
+            "name": "KPI Pipeline Value",
+            "expression": "SUM(crm_monthly[Pipeline Value])",
+            "formatString": "₺#,0",
+            "lineageTag": "55d4d71f-f4a1-4d07-a8b7-262edf3cf680"
+          },
+          {
+            "name": "KPI Average Deal Size",
+            "expression": "DIVIDE([KPI Won Revenue],[KPI Won Deals],0)",
+            "formatString": "₺#,0",
+            "lineageTag": "805a062e-c89c-4759-8e31-cff5af3f96bf"
+          },
+          {
+            "name": "KPI Lead Qualification Rate",
+            "expression": "DIVIDE([KPI Qualified Leads],[KPI New Leads],0)",
+            "formatString": "0.0%",
+            "lineageTag": "ad28361b-d1ac-4547-b112-194185048634"
+          },
+          {
+            "name": "KPI Opportunity Conversion",
+            "expression": "DIVIDE([KPI Opportunities],[KPI Qualified Leads],0)",
+            "formatString": "0.0%",
+            "lineageTag": "bd996f2d-74cd-486c-8f2e-643e026a1dd4"
+          },
+          {
+            "name": "KPI Win Rate",
+            "expression": "DIVIDE([KPI Won Deals],[KPI Opportunities],0)",
+            "formatString": "0.0%",
+            "lineageTag": "1a685ff8-48b3-4420-96ec-e93cc433936c"
+          },
+          {
+            "name": "KPI Target Attainment",
+            "expression": "DIVIDE([KPI Won Revenue],[KPI Revenue Target],0)",
+            "formatString": "0.0%",
+            "lineageTag": "f23836d8-fbbd-4751-8441-425ee1e47f3c"
+          },
+          {
+            "name": "KPI Sales Cycle Days",
+            "expression": "AVERAGE(crm_monthly[Sales Cycle Days])",
+            "formatString": "0.0",
+            "lineageTag": "87e7c573-5f4d-44ae-ae2a-c250eea4dca3"
+          },
+          {
+            "name": "KPI New Customers",
+            "expression": "SUM(crm_monthly[New Customers])",
+            "formatString": "#,0",
+            "lineageTag": "686cd27a-d6fc-4df0-ab7d-eadb46d52bd3"
+          },
+          {
+            "name": "KPI Churn Rate",
+            "expression": "AVERAGE(crm_monthly[Churn Rate])",
+            "formatString": "0.0%",
+            "lineageTag": "5146096f-22ef-439a-963b-43647bec5ad7"
+          },
+          {
+            "name": "KPI New Leads PY",
+            "expression": "CALCULATE([KPI New Leads],DATEADD(Calendar[Date],-1,YEAR))",
+            "formatString": "#,0",
+            "lineageTag": "0dda3df2-dbf7-469e-9253-ae60f3b43106"
+          },
+          {
+            "name": "KPI Won Revenue PY",
+            "expression": "CALCULATE([KPI Won Revenue],DATEADD(Calendar[Date],-1,YEAR))",
+            "formatString": "₺#,0",
+            "lineageTag": "a3f47fd0-57d0-439b-8b65-b045970c3045"
+          },
+          {
+            "name": "KPI Leads YoY %",
+            "expression": "DIVIDE([KPI New Leads]-[KPI New Leads PY],[KPI New Leads PY],0)",
+            "formatString": "0.0%",
+            "lineageTag": "e6d2c158-d4f1-411a-8ac3-63f0e3969a43"
+          },
+          {
+            "name": "KPI Revenue YoY %",
+            "expression": "DIVIDE([KPI Won Revenue]-[KPI Won Revenue PY],[KPI Won Revenue PY],0)",
+            "formatString": "0.0%",
+            "lineageTag": "892b1908-36c1-45b1-99d2-741225dc792b"
+          },
+          {
+            "name": "KPI Revenue Variance",
+            "expression": "[KPI Won Revenue]-[KPI Revenue Target]",
+            "formatString": "₺#,0",
+            "lineageTag": "9efef1ed-ada5-45c7-ab17-ded541fe286c"
+          },
+          {
+            "name": "KPI Revenue Variance %",
+            "expression": "DIVIDE([KPI Revenue Variance],[KPI Revenue Target],0)",
+            "formatString": "0.0%",
+            "lineageTag": "e86f8ade-f73a-4fa6-9f03-345e587806ba"
+          },
+          {
+            "name": "KPI Win Rate Target",
+            "expression": "0.32",
+            "formatString": "0.0%",
+            "lineageTag": "b26d0cb6-3802-4d5d-bc78-c03d4008ad8b"
+          },
+          {
+            "name": "KPI Pipeline Target",
+            "expression": "[KPI Revenue Target]*3",
+            "formatString": "₺#,0",
+            "lineageTag": "a784c60f-a675-4893-b462-5732b23319e6"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "crm_monthly",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Binary = Binary.FromText(\"TW9udGgsTW9udGggS2V5LE5ldyBMZWFkcyxMZWFkIFRhcmdldCxRdWFsaWZpZWQgTGVhZHMsT3Bwb3J0dW5pdGllcyxXb24gRGVhbHMsQXZlcmFnZSBEZWFsIFNpemUsV29uIFJldmVudWUsUmV2ZW51ZSBUYXJnZXQsUGlwZWxpbmUgVmFsdWUsU2FsZXMgQ3ljbGUgRGF5cyxOZXcgQ3VzdG9tZXJzLENodXJuIFJhdGUsTGVhZCBRdWFsaWZpY2F0aW9uIFJhdGUsT3Bwb3J0dW5pdHkgQ29udmVyc2lvbixXaW4gUmF0ZSxUYXJnZXQgQXR0YWlubWVudAoyMDI0LTAxLTAxLDIwMjQtMDEsMTA3NCwxMTEwLDU2OSwyNzMsODUsMTgzMDAsMTU1NTUwMCwxNTg1MDAwLDEzMjM5MDAwLDUyLDg1LDAuMDMyLDAuNTI5Nzk1MTU4Mjg2Nzc4NCwwLjQ3OTc4OTEwMzY5MDY4NTQsMC4zMTEzNTUzMTEzNTUzMTEzNiwwLjk4MTM4ODAxMjYxODI5NjYKMjAyNC0wMi0wMSwyMDI0LTAyLDExNDcsMTE0Nyw2MTcsMjk2LDkzLDE4MjAwLDE2OTI2MDAsMTYyOTAwMCwxNDI3NjAwMCw1Myw5MywwLjAzMTgwNjI3MTc5MjE5MjY5LDAuNTM3OTI1MDIxNzk1OTg5NiwwLjQ3OTc0MDY4MDcxMzEyODAzLDAuMzE0MTg5MTg5MTg5MTg5MiwxLjAzOTA0MjM1NzI3NDQwMTQKMjAyNC0wMy0wMSwyMDI0LTAzLDExNzAsMTIyMCw2MzgsMzA1LDk3LDE4MDAwLDE3NDYwMDAsMTcxMzAwMCwxNDU0OTAwMCw1NCw5NywwLjAzMTI0Mzg1MjQ3ODAyMDg3MiwwLjU0NTI5OTE0NTI5OTE0NTIsMC40NzgwNTY0MjYzMzIyODg0LDAuMzE4MDMyNzg2ODg1MjQ1OSwxLjAxOTI2NDQ0ODMzNjI1MjMKMjAyNC0wNC0wMSwyMDI0LTA0LDExOTIsMTI2OSw2NTcsMzEyLDEwMCwxNzgwMCwxNzgwMDAwLDE3NjIwMDAsMTQ3MTcwMDAsNTUsMTAwLDAuMDMwMzY3MjIwMzAwMzY5OTEsMC41NTExNzQ0OTY2NDQyOTUzLDAuNDc0ODg1ODQ0NzQ4ODU4NCwwLjMyMDUxMjgyMDUxMjgyMDU0LDEuMDEwMjE1NjY0MDE4MTYxMgoyMDI0LTA1LTAxLDIwMjQtMDUsMTI4MSwxMzA1LDcxMCwzMzQsMTA4LDE3NjAwLDE5MDA4MDAsMTc5MjAwMCwxNTU3ODAwMCw1NSwxMDgsMC4wMjkyNjEyODk0NDk1ODEwNzcsMC41NTQyNTQ0ODg2ODA3MTgxLDAuNDcwNDIyNTM1MjExMjY3NiwwLjMyMzM1MzI5MzQxMzE3MzY1LDEuMDYwNzE0Mjg1NzE0Mjg1NwoyMDI0LTA2LTAxLDIwMjQtMDYsMTIzNCwxMjQ0LDY4NSwzMTksMTA0LDE3NDAwLDE4MDk2MDAsMTY4OTAwMCwxNDcwOTAwMCw1NCwxMDQsMC4wMjgwMzMxODQ5MjY0OTU0MzUsMC41NTUxMDUzNDg0NjAyOTE3LDAuNDY1NjkzNDMwNjU2OTM0MywwLjMyNjAxODgwODc3NzQyOTQ1LDEuMDcxNDAzMTk3MTU4MDgxNwoyMDI0LTA3LTAxLDIwMjQtMDcsMTEwNiwxMTcxLDYxMSwyODIsOTIsMTc0MDAsMTYwMDgwMCwxNTkwMDAwLDEzMDAzMDAwLDU0LDkyLDAuMDI2ODAxODY1OTc1MjQxNzA0LDAuNTUyNDQxMjI5NjU2NDE5NSwwLjQ2MTUzODQ2MTUzODQ2MTU2LDAuMzI2MjQxMTM0NzUxNzczMSwxLjAwNjc5MjQ1MjgzMDE4ODYKMjAyNC0wOC0wMSwyMDI0LTA4LDExMzMsMTE5Niw2MjEsMjgzLDkzLDE3NDAwLDE2MTgyMDAsMTYyNDAwMCwxMzA0OTAwMCw1Miw5MywwLjAyNTY4NjYwMzIwMjY1MjY2OCwwLjU0ODEwMjM4MzA1MzgzOTQsMC40NTU3MTY1ODYxNTEzNjg4LDAuMzI4NjIxOTA4MTI3MjA4NSwwLjk5NjQyODU3MTQyODU3MTQKMjAyNC0wOS0wMSwyMDI0LTA5LDEyODMsMTI5Myw2OTUsMzE0LDEwMywxNzUwMCwxODAyNTAwLDE3NjUwMDAsMTQ1NjIwMDAsNTEsMTAzLDAuMDI0Nzk1NDI1NTM3ODEyMjY2LDAuNTQxNjk5MTQyNjM0NDUwNSwwLjQ1MTc5ODU2MTE1MTA3OTE0LDAuMzI4MDI1NDc3NzA3MDA2MzUsMS4wMjEyNDY0NTg5MjM1MTI4CjIwMjQtMTAtMDEsMjAyNC0xMCwxMzI1LDEzNTQsNzA3LDMxNiwxMDMsMTc3MDAsMTgyMzEwMCwxODcwMDAwLDE0ODIyMDAwLDUwLDEwMywwLjAyNDIxNDY1NjEwNjY0NDIyLDAuNTMzNTg0OTA1NjYwMzc3MywwLjQ0Njk1ODk4MTYxMjQ0Njk2LDAuMzI1OTQ5MzY3MDg4NjA3NiwwLjk3NDkxOTc4NjA5NjI1NjcKMjAyNC0xMS0wMSwyMDI0LTExLDEzMjAsMTQwMyw2OTMsMzA4LDEwMSwxNzkwMCwxODA3OTAwLDE5NTkwMDAsMTQ2MTAwMDAsNDksMTAxLDAuMDI0MDAwNTUwNjE5NjczMjUzLDAuNTI1LDAuNDQ0NDQ0NDQ0NDQ0NDQ0NCwwLjMyNzkyMjA3NzkyMjA3Nzk1LDAuOTIyODY4ODEwNjE3NjYyMQoyMDI0LTEyLTAxLDIwMjQtMTIsMTQxMCwxNDY0LDczMCwzMjIsMTA1LDE4MTAwLDE5MDA1MDAsMjA2NzAwMCwxNTQ0NTAwMCw0OSwxMDUsMC4wMjQxNzM4NDgyMTMwMzU2NywwLjUxNzczMDQ5NjQ1MzkwMDcsMC40NDEwOTU4OTA0MTA5NTg5LDAuMzI2MDg2OTU2NTIxNzM5MTQsMC45MTk0NDg0NzYwNTIyNDk3CjIwMjUtMDEtMDEsMjAyNS0wMSwxMjQxLDEyNDMsNjM0LDI3OSw5MCwxOTYwMCwxNzY0MDAwLDE5MDEwMDAsMTQ0OTEwMDAsNDYsOTAsMC4wMjI3MTc3NjI1NzA2NDE3NiwwLjUxMDg3ODMyMzkzMjMxMjcsMC40NDAwNjMwOTE0ODI2NDk4LDAuMzIyNTgwNjQ1MTYxMjkwMywwLjkyNzkzMjY2NzAxNzM1OTMKMjAyNS0wMi0wMSwyMDI1LTAyLDEyMzgsMTI4NCw2MjcsMjc2LDg4LDE5NjAwLDE3MjQ4MDAsMTk2MzAwMCwxNDMzNTAwMCw0Nyw4OCwwLjAyMzU3OTYwNzkxNTY0MTY3LDAuNTA2NDYyMDM1NTQxMTk1NSwwLjQ0MDE5MTM4NzU1OTgwODYzLDAuMzE4ODQwNTc5NzEwMTQ0OSwwLjg3ODY1NTExOTcxNDcyMjMKMjAyNS0wMy0wMSwyMDI1LTAzLDEyODUsMTM2Niw2NDksMjg2LDkwLDE5NTAwLDE3NTUwMDAsMjA3ODAwMCwxNDc3OTAwMCw0OCw5MCwwLjAyNDY3NTkwMjM3MDk4ODQ0OCwwLjUwNTA1ODM2NTc1ODc1NDgsMC40NDA2Nzc5NjYxMDE2OTQ5LDAuMzE0Njg1MzE0Njg1MzE0NywwLjg0NDU2MjA3ODkyMjA0MDQKMjAyNS0wNC0wMSwyMDI1LTA0LDEzODgsMTQyMSw3MDIsMzExLDk3LDE5MzAwLDE4NzIxMDAsMjE0MDAwMCwxNTkwNjAwMCw1MCw5NywwLjAyNTkwMDQ1NDM1NjY1MDM5MywwLjUwNTc2MzY4ODc2MDgwNjksMC40NDMwMTk5NDMwMTk5NDMsMC4zMTE4OTcxMDYxMDkzMjQ3NSwwLjg3NDgxMzA4NDExMjE0OTUKMjAyNS0wNS0wMSwyMDI1LTA1LDE0NDgsMTQ2Miw3MzgsMzMwLDEwMiwxOTEwMCwxOTQ4MjAwLDIxNzkwMDAsMTY3MDMwMDAsNTEsMTAyLDAuMDI3MTM0NjQ4NzQxODUyOTAzLDAuNTA5NjY4NTA4Mjg3MjkyOCwwLjQ0NzE1NDQ3MTU0NDcxNTQ0LDAuMzA5MDkwOTA5MDkwOTA5MSwwLjg5NDA3OTg1MzE0MzY0MzkKMjAyNS0wNi0wMSwyMDI1LTA2LDEzMjYsMTM5NCw2ODQsMzA5LDk0LDE4OTAwLDE3NzY2MDAsMjA1NTAwMCwxNTQ3NjAwMCw1Miw5NCwwLjAyODI1ODkzNjM5MzQzMDQyNiwwLjUxNTgzNzEwNDA3MjM5ODIsMC40NTE3NTQzODU5NjQ5MTIzLDAuMzA0MjA3MTE5NzQxMTAwMywwLjg2NDUyNTU0NzQ0NTI1NTQKMjAyNS0wNy0wMSwyMDI1LTA3LDEyNDEsMTMxMiw2NDksMjk2LDg5LDE4NzAwLDE2NjQzMDAsMTkxNDAwMCwxNDY2ODAwMCw1Miw4OSwwLjAyOTE2NDQxNDE5NTQ4Mjk1NiwwLjUyMjk2NTM1MDUyMzc3MTEsMC40NTYwODYyODY1OTQ3NjEyLDAuMzAwNjc1Njc1Njc1Njc1NjYsMC44Njk1NDAyMjk4ODUwNTc1CjIwMjUtMDgtMDEsMjAyNS0wOCwxMzI1LDEzMzksNzA0LDMyNCw5NywxODcwMCwxODEzOTAwLDE5NTMwMDAsMTYwNTYwMDAsNTIsOTcsMC4wMjk3NjMzNzM4NTIxMTAwMTcsMC41MzEzMjA3NTQ3MTY5ODExLDAuNDYwMjI3MjcyNzI3MjcyNywwLjI5OTM4MjcxNjA0OTM4MjcsMC45Mjg3NzYyNDE2Nzk0Njc1CjIwMjUtMDktMDEsMjAyNS0wOSwxNDIxLDE0NDgsNzY2LDM1NywxMDYsMTg4MDAsMTk5MjgwMCwyMTI0MDAwLDE3Nzg2MDAwLDUxLDEwNiwwLjAyOTk5Nzc5NzY3Mjg5Nzk5NCwwLjUzOTA1NzAwMjExMTE4OTMsMC40NjYwNTc0NDEyNTMyNjM3LDAuMjk2OTE4NzY3NTA3MDAyOCwwLjkzODIyOTc1NTE3ODkwNzcKMjAyNS0xMC0wMSwyMDI1LTEwLDE0MzIsMTUxNyw3ODIsMzY4LDEwOCwxODkwMCwyMDQxMjAwLDIyMzcwMDAsMTg0MzEwMDAsNTAsMTA4LDAuMDI5ODQ0OTc4NDA0NTEyNTksMC41NDYwODkzODU0NzQ4NjAzLDAuNDcwNTg4MjM1Mjk0MTE3NjQsMC4yOTM0NzgyNjA4Njk1NjUyNCwwLjkxMjQ3MjA2MDc5NTcwODUKMjAyNS0xMS0wMSwyMDI1LTExLDE1MDksMTU3MSw4MzIsMzk1LDExNiwxOTIwMCwyMjI3MjAwLDIzNTMwMDAsMjAwOTgwMDAsNDksMTE2LDAuMDI5MzE5NzE4NzQ4NDQ1MTcsMC41NTEzNTg1MTU1NzMyMjczLDAuNDc0NzU5NjE1Mzg0NjE1MzYsMC4yOTM2NzA4ODYwNzU5NDk0LDAuOTQ2NTM2MzM2NTkxNTg1MgoyMDI1LTEyLTAxLDIwMjUtMTIsMTYyMywxNjQwLDkwMCw0MzAsMTI2LDE5NDAwLDI0NDQ0MDAsMjQ4MjAwMCwyMjEwNjAwMCw0NywxMjYsMC4wMjg0NzI4OTc1MTA1OTc0MzYsMC41NTQ1Mjg2NTA2NDY5NTAxLDAuNDc3Nzc3Nzc3Nzc3Nzc3OCwwLjI5MzAyMzI1NTgxMzk1MzUsMC45ODQ4NTA5MjY2NzIwMzg3CjIwMjYtMDEtMDEsMjAyNi0wMSwxMzMzLDEzNzcsNzM5LDM1NCwxMDMsMjA5MDAsMjE1MjcwMCwyMjQ1MDAwLDE5NjA2MDAwLDQzLDEwMywwLjAyNTM4NjU0MTI3MTM0MDEwNSwwLjU1NDM4ODU5NzE0OTI4NzMsMC40NzkwMjU3MTA0MTk0ODU4LDAuMjkwOTYwNDUxOTc3NDAxMSwwLjk1ODg4NjQxNDI1Mzg5NzUKMjAyNi0wMi0wMSwyMDI2LTAyLDEzMzgsMTQyMiw3MzksMzU1LDEwNCwyMDkwMCwyMTczNjAwLDIzMTkwMDAsMTk2NjIwMDAsNDMsMTA0LDAuMDI0MTY1ODc4OTU0MzA4OTc3LDAuNTUyMzE2ODkwODgxOTEzMywwLjQ4MDM3ODg5MDM5MjQyMjIsMC4yOTI5NTc3NDY0Nzg4NzMyNCwwLjkzNzMwMDU2MDU4NjQ1OTcKMjAyNi0wMy0wMSwyMDI2LTAzLDE0NzEsMTUxMyw4MDUsMzg2LDExNCwyMDkwMCwyMzgyNjAwLDI0NjcwMDAsMjEzNzkwMDAsNDMsMTE0LDAuMDIyOTI5MTQ4OTIxMDEyMjM1LDAuNTQ3MjQ2NzcwOTA0MTQ2OSwwLjQ3OTUwMzEwNTU5MDA2MjEsMC4yOTUzMzY3ODc1NjQ3NjY4MywwLjk2NTc4ODQwNjk3MjAzMDgKMjAyNi0wNC0wMSwyMDI2LTA0LDE1NTcsMTU3Myw4NDEsNDAyLDExOSwyMDgwMCwyNDc1MjAwLDI1NTMwMDAsMjIxNTgwMDAsNDQsMTE5LDAuMDIxNzk2MTQ1OTE3ODk1OTA4LDAuNTQwMTQxMjk3MzY2NzMwOSwwLjQ3ODAwMjM3ODEyMTI4NDIsMC4yOTYwMTk5MDA0OTc1MTI0LDAuOTY5NTI2MDQ3Nzg2OTE3MwoyMDI2LTA1LTAxLDIwMjYtMDUsMTU0OCwxNjE5LDgyNCwzOTEsMTE3LDIwNjAwLDI0MTAyMDAsMjYwMjAwMCwyMTM0NTAwMCw0NSwxMTcsMC4wMjA4NzY2MTcyNjU1NzcwMDUsMC41MzIyOTk3NDE2MDIwNjcyLDAuNDc0NTE0NTYzMTA2Nzk2MTMsMC4yOTkyMzI3MzY1NzI4OSwwLjkyNjI4NzQ3MTE3NjAxODQKMjAyNi0wNi0wMSwyMDI2LTA2LDE0NjEsMTU0Myw3NjYsMzYxLDEwOSwyMDMwMCwyMjEyNzAwLDI0NDQwMDAsMTk0MjAwMDAsNDYsMTA5LDAuMDIwMjU5NjMyMjgyOTc2MTM1LDAuNTI0Mjk4NDI1NzM1Nzk3NCwwLjQ3MTI3OTM3MzM2ODE0NjI0LDAuMzAxOTM5MDU4MTcxNzQ1MTYsMC45MDUzNjAwNjU0NjY0NDg0CjIwMjYtMDctMDEsMjAyNi0wNywxNDMwLDE0NTIsNzM4LDM0NSwxMDUsMjAyMDAsMjEyMTAwMCwyMjg4MDAwLDE4NDY4MDAwLDQ3LDEwNSwwLjAyMDAwNDk1NDY2NzU1NDk0NCwwLjUxNjA4MzkxNjA4MzkxNjEsMC40Njc0Nzk2NzQ3OTY3NDc5NiwwLjMwNDM0NzgyNjA4Njk1NjU0LDAuOTI3MDEwNDg5NTEwNDg5NQoyMDI2LTA4LTAxLDIwMjYtMDgsMTQ1OSwxNDgzLDc0NSwzNDQsMTA2LDIwMTAwLDIxMzA2MDAsMjMyNjAwMCwxODMyMzAwMCw0OCwxMDYsMC4wMjAxMzcyNTM1MzgzMTU1MjUsMC41MTA2MjM3MTQ4NzMyMDA4LDAuNDYxNzQ0OTY2NDQyOTUzMDQsMC4zMDgxMzk1MzQ4ODM3MjA5LDAuOTE1OTkzMTIxMjM4MTc3MQoyMDI2LTA5LTAxLDIwMjYtMDksMTUxOSwxNjA0LDc2OSwzNTIsMTEwLDIwMTAwLDIyMTEwMDAsMjUxNTAwMCwxODc0OTAwMCw0OSwxMTAsMC4wMjA2NDM3MTM4ODM2OTQxOTIsMC41MDYyNTQxMTQ1NDkwNDU1LDAuNDU3NzM3MzIxMTk2MzU4OSwwLjMxMjUsMC44NzkxMjUyNDg1MDg5NDY0CjIwMjYtMTAtMDEsMjAyNi0xMCwxNjA4LDE2NzksODEyLDM2NywxMTYsMjAyMDAsMjM0MzIwMCwyNjQ2MDAwLDE5NjQ2MDAwLDQ5LDExNiwwLjAyMTQ3NTI3Nzg3NjE3MzA5NywwLjUwNDk3NTEyNDM3ODEwOTQsMC40NTE5NzA0NDMzNDk3NTM2NywwLjMxNjA3NjI5NDI3NzkyOTE2LDAuODg1NTYzMTE0MTM0NTQyNwoyMDI2LTExLTAxLDIwMjYtMTEsMTcxOSwxNzQwLDg3MSwzOTAsMTI0LDIwNDAwLDI1Mjk2MDAsMjc2OTAwMCwyMTA4MzAwMCw0OCwxMjQsMC4wMjI1NTEzOTY4MTQ3ODIyMzMsMC41MDY2ODk5MzYwMDkzMDc4LDAuNDQ3NzYxMTk0MDI5ODUwNzYsMC4zMTc5NDg3MTc5NDg3MTc5MywwLjkxMzU0Mjc5NTIzMjkzNjEKMjAyNi0xMi0wMSwyMDI2LTEyLDE3NjMsMTgxNSw5MDAsNDAwLDEyOSwyMDYwMCwyNjU3NDAwLDI5MTcwMDAsMjE4MzYwMDAsNDcsMTI5LDAuMDIzNzY3ODMzNDAyODM5NDcsMC41MTA0OTM0NzcwMjc3OTM2LDAuNDQ0NDQ0NDQ0NDQ0NDQ0NCwwLjMyMjUsMC45MTEwMDQ0NTY2MzM1Mjc2Cg==\", BinaryEncoding.Base64),",
+                "    Source = Csv.Document(Binary, [Delimiter=\",\", Columns=18, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"Month\", type date}, {\"Month Key\", type text}, {\"New Leads\", Int64.Type}, {\"Lead Target\", Int64.Type}, {\"Qualified Leads\", Int64.Type}, {\"Opportunities\", Int64.Type}, {\"Won Deals\", Int64.Type}, {\"Average Deal Size\", type number}, {\"Won Revenue\", type number}, {\"Revenue Target\", type number}, {\"Pipeline Value\", type number}, {\"Sales Cycle Days\", Int64.Type}, {\"New Customers\", Int64.Type}, {\"Churn Rate\", type number}, {\"Lead Qualification Rate\", type number}, {\"Opportunity Conversion\", type number}, {\"Win Rate\", type number}, {\"Target Attainment\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "crm_rep_performance",
+        "columns": [
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "mmm yyyy",
+            "lineageTag": "2d2a4329-2ae0-4d4d-a3da-6627957efb33",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month Key",
+            "dataType": "string",
+            "lineageTag": "36db7943-e729-43e2-9962-71b267165fbe",
+            "sourceColumn": "Month Key"
+          },
+          {
+            "name": "Sales Rep",
+            "dataType": "string",
+            "lineageTag": "c0b70818-e6ca-4102-8f4e-a3d0046bc174",
+            "sourceColumn": "Sales Rep"
+          },
+          {
+            "name": "New Leads",
+            "dataType": "int64",
+            "lineageTag": "95f99b86-55ae-4585-b388-db62522d1541",
+            "sourceColumn": "New Leads"
+          },
+          {
+            "name": "Opportunities",
+            "dataType": "int64",
+            "lineageTag": "aefa29ae-fa1d-42d2-8407-d1ea4c19f56d",
+            "sourceColumn": "Opportunities"
+          },
+          {
+            "name": "Won Deals",
+            "dataType": "int64",
+            "lineageTag": "39ff9629-0af4-4f7c-aa85-80f213cbedb8",
+            "sourceColumn": "Won Deals"
+          },
+          {
+            "name": "Won Revenue",
+            "dataType": "double",
+            "lineageTag": "2b5b60a1-8cd0-4c7d-a2d7-9c801ff7c163",
+            "sourceColumn": "Won Revenue"
+          },
+          {
+            "name": "Revenue Target",
+            "dataType": "double",
+            "lineageTag": "4cc9022a-0fb7-48d6-b957-24a4be7ada67",
+            "sourceColumn": "Revenue Target"
+          },
+          {
+            "name": "Win Rate",
+            "dataType": "double",
+            "lineageTag": "fa23962d-3fde-4e52-8551-d125c9adab89",
+            "sourceColumn": "Win Rate"
+          },
+          {
+            "name": "Sales Cycle Days",
+            "dataType": "int64",
+            "lineageTag": "7ac4e2bb-b9db-4b56-b830-0a9174185cf8",
+            "sourceColumn": "Sales Cycle Days"
+          }
+        ],
+        "lineageTag": "6b1dcd12-df5a-4c65-9861-9d73762f8dd2",
+        "measures": [
+          {
+            "name": "Rep Won Revenue",
+            "expression": "SUM(crm_rep_performance[Won Revenue])",
+            "formatString": "₺#,0",
+            "lineageTag": "1a9821d2-6e99-4d6b-93b4-a1cb27939d80"
+          },
+          {
+            "name": "Rep Revenue Target",
+            "expression": "SUM(crm_rep_performance[Revenue Target])",
+            "formatString": "₺#,0",
+            "lineageTag": "31b28154-6542-4b90-94d1-e4fa7cbfca54"
+          },
+          {
+            "name": "Rep Won Deals",
+            "expression": "SUM(crm_rep_performance[Won Deals])",
+            "formatString": "#,0",
+            "lineageTag": "fe7996de-3ea7-4d02-8710-d94addbaf8d3"
+          },
+          {
+            "name": "Rep Opportunities",
+            "expression": "SUM(crm_rep_performance[Opportunities])",
+            "formatString": "#,0",
+            "lineageTag": "6d2ed447-214d-48a3-8f9d-eda2193b0b0f"
+          },
+          {
+            "name": "Rep Win Rate",
+            "expression": "DIVIDE([Rep Won Deals],[Rep Opportunities],0)",
+            "formatString": "0.0%",
+            "lineageTag": "5c86be28-212c-47d2-9777-38b41d81d1ee"
+          },
+          {
+            "name": "Rep Sales Cycle Days",
+            "expression": "AVERAGE(crm_rep_performance[Sales Cycle Days])",
+            "formatString": "0.0",
+            "lineageTag": "c1ae1639-1f6b-4540-9455-6da8947626ff"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "crm_rep_performance",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Binary = Binary.FromText(\"TW9udGgsTW9udGggS2V5LFNhbGVzIFJlcCxOZXcgTGVhZHMsT3Bwb3J0dW5pdGllcyxXb24gRGVhbHMsV29uIFJldmVudWUsUmV2ZW51ZSBUYXJnZXQsV2luIFJhdGUsU2FsZXMgQ3ljbGUgRGF5cwoyMDI0LTAxLTAxLDIwMjQtMDEsQXnFn2UgRGVtaXIsMjQ3LDU4LDE2LDI2OTAwMCwzNjUwMDAsMC4yNzU4NjIwNjg5NjU1MTcyNCw1NgoyMDI0LTAxLTAxLDIwMjQtMDEsRW1yZSBLYXlhLDI0MSw1OSwxOSwzMzYwMDAsMzMzMDAwLDAuMzIyMDMzODk4MzA1MDg0Nyw1NAoyMDI0LTAxLTAxLDIwMjQtMDEsU2VsaW4gWcSxbG1heiwyMjAsNTUsMTgsMzMzMDAwLDMxNzAwMCwwLjMyNzI3MjcyNzI3MjcyNzI3LDUzCjIwMjQtMDEtMDEsMjAyNC0wMSxDYW4gQXJzbGFuLDE5Miw1MCwxNywzMjgwMDAsMzAxMDAwLDAuMzQsNTEKMjAyNC0wMS0wMSwyMDI0LTAxLERlbml6IEtvw6csMTc1LDQ3LDE2LDMyMjAwMCwyNjkwMDAsMC4zNDA0MjU1MzE5MTQ4OTM2LDQ5CjIwMjQtMDItMDEsMjAyNC0wMixBecWfZSBEZW1pciwyNzksNjYsMTksMzE4MDAwLDM3NTAwMCwwLjI4Nzg3ODc4Nzg3ODc4NzksNTcKMjAyNC0wMi0wMSwyMDI0LTAyLEVtcmUgS2F5YSwyNTIsNjEsMTksMzM0MDAwLDM0MjAwMCwwLjMxMTQ3NTQwOTgzNjA2NTYsNTUKMjAyNC0wMi0wMSwyMDI0LTAyLFNlbGluIFnEsWxtYXosMjIwLDU1LDE4LDMzMTAwMCwzMjYwMDAsMC4zMjcyNzI3MjcyNzI3MjcyNyw1NAoyMDI0LTAyLTAxLDIwMjQtMDIsQ2FuIEFyc2xhbiwyMDQsNTMsMTcsMzI2MDAwLDMxMDAwMCwwLjMyMDc1NDcxNjk4MTEzMjA2LDUyCjIwMjQtMDItMDEsMjAyNC0wMixEZW5peiBLb8OnLDE5OSw1MywxNywzNDAwMDAsMjc3MDAwLDAuMzIwNzU0NzE2OTgxMTMyMDYsNTAKMjAyNC0wMy0wMSwyMDI0LTAzLEF5xZ9lIERlbWlyLDI4Niw2NywyMCwzMzEwMDAsMzk0MDAwLDAuMjk4NTA3NDYyNjg2NTY3MTQsNTgKMjAyNC0wMy0wMSwyMDI0LTAzLEVtcmUgS2F5YSwyNDEsNTksMTksMzMwMDAwLDM2MDAwMCwwLjMyMjAzMzg5ODMwNTA4NDcsNTYKMjAyNC0wMy0wMSwyMDI0LTAzLFNlbGluIFnEsWxtYXosMjE4LDU1LDE4LDMyNzAwMCwzNDMwMDAsMC4zMjcyNzI3MjcyNzI3MjcyNyw1NQoyMDI0LTAzLTAxLDIwMjQtMDMsQ2FuIEFyc2xhbiwyMjEsNTcsMTgsMzQyMDAwLDMyNTAwMCwwLjMxNTc4OTQ3MzY4NDIxMDUsNTMKMjAyNC0wMy0wMSwyMDI0LTAzLERlbml6IEtvw6csMjEyLDU3LDE5LDM3NjAwMCwyOTEwMDAsMC4zMzMzMzMzMzMzMzMzMzMzLDUxCjIwMjQtMDQtMDEsMjAyNC0wNCxBecWfZSBEZW1pciwyNzcsNjUsMTksMzExMDAwLDQwNTAwMCwwLjI5MjMwNzY5MjMwNzY5MjMsNTkKMjAyNC0wNC0wMSwyMDI0LTA0LEVtcmUgS2F5YSwyMzQsNTcsMTgsMzA5MDAwLDM3MDAwMCwwLjMxNTc4OTQ3MzY4NDIxMDUsNTcKMjAyNC0wNC0wMSwyMDI0LTA0LFNlbGluIFnEsWxtYXosMjMxLDU4LDE4LDMyNDAwMCwzNTIwMDAsMC4zMTAzNDQ4Mjc1ODYyMDY5LDU2CjIwMjQtMDQtMDEsMjAyNC0wNCxDYW4gQXJzbGFuLDIzOSw2MiwyMCwzNzYwMDAsMzM1MDAwLDAuMzIyNTgwNjQ1MTYxMjkwMyw1NAoyMDI0LTA0LTAxLDIwMjQtMDQsRGVuaXogS2/DpywyMTMsNTcsMTksMzcyMDAwLDMwMDAwMCwwLjMzMzMzMzMzMzMzMzMzMzMsNTIKMjAyNC0wNS0wMSwyMDI0LTA1LEF5xZ9lIERlbWlyLDI3OSw2NiwyMCwzMjQwMDAsNDEyMDAwLDAuMzAzMDMwMzAzMDMwMzAzMDQsNTkKMjAyNC0wNS0wMSwyMDI0LTA1LEVtcmUgS2F5YSwyNTQsNjIsMTksMzIzMDAwLDM3NjAwMCwwLjMwNjQ1MTYxMjkwMzIyNTgsNTcKMjAyNC0wNS0wMSwyMDI0LTA1LFNlbGluIFnEsWxtYXosMjY1LDY3LDIxLDM3MzAwMCwzNTgwMDAsMC4zMTM0MzI4MzU4MjA4OTU1NCw1NgoyMDI0LTA1LTAxLDIwMjQtMDUsQ2FuIEFyc2xhbiwyNTksNjcsMjEsMzkwMDAwLDM0MDAwMCwwLjMxMzQzMjgzNTgyMDg5NTU0LDU0CjIwMjQtMDUtMDEsMjAyNC0wNSxEZW5peiBLb8OnLDIxNSw1NywxOSwzNjgwMDAsMzA1MDAwLDAuMzMzMzMzMzMzMzMzMzMzMyw1MgoyMDI0LTA2LTAxLDIwMjQtMDYsQXnFn2UgRGVtaXIsMjY1LDYyLDE5LDMwNDAwMCwzODgwMDAsMC4zMDY0NTE2MTI5MDMyMjU4LDU4CjIwMjQtMDYtMDEsMjAyNC0wNixFbXJlIEtheWEsMjYxLDYzLDE5LDMxOTAwMCwzNTUwMDAsMC4zMDE1ODczMDE1ODczMDE1Nyw1NgoyMDI0LTA2LTAxLDIwMjQtMDYsU2VsaW4gWcSxbG1heiwyNjQsNjYsMjAsMzUxMDAwLDMzODAwMCwwLjMwMzAzMDMwMzAzMDMwMzA0LDU1CjIwMjQtMDYtMDEsMjAyNC0wNixDYW4gQXJzbGFuLDIzOCw2MiwxOSwzNDkwMDAsMzIxMDAwLDAuMzA2NDUxNjEyOTAzMjI1OCw1MwoyMDI0LTA2LTAxLDIwMjQtMDYsRGVuaXogS2/DpywxOTYsNTIsMTcsMzI1MDAwLDI4NzAwMCwwLjMyNjkyMzA3NjkyMzA3NjksNTEKMjAyNC0wNy0wMSwyMDI0LTA3LEF5xZ9lIERlbWlyLDI0OSw1OSwxOCwyODgwMDAsMzY2MDAwLDAuMzA1MDg0NzQ1NzYyNzExOSw1OAoyMDI0LTA3LTAxLDIwMjQtMDcsRW1yZSBLYXlhLDI0Nyw2MCwxOCwzMDIwMDAsMzM0MDAwLDAuMyw1NgoyMDI0LTA3LTAxLDIwMjQtMDcsU2VsaW4gWcSxbG1heiwyMzAsNTgsMTcsMjk5MDAwLDMxODAwMCwwLjI5MzEwMzQ0ODI3NTg2MjA0LDU1CjIwMjQtMDctMDEsMjAyNC0wNyxDYW4gQXJzbGFuLDIwMCw1MiwxNiwyOTQwMDAsMzAyMDAwLDAuMzA3NjkyMzA3NjkyMzA3Nyw1MwoyMDI0LTA3LTAxLDIwMjQtMDcsRGVuaXogS2/DpywxNzcsNDcsMTYsMzA2MDAwLDI3MDAwMCwwLjM0MDQyNTUzMTkxNDg5MzYsNTEKMjAyNC0wOC0wMSwyMDI0LTA4LEF5xZ9lIERlbWlyLDI3Myw2NCwxOSwzMDQwMDAsMzc0MDAwLDAuMjk2ODc1LDU2CjIwMjQtMDgtMDEsMjAyNC0wOCxFbXJlIEtheWEsMjUyLDYxLDE4LDMwMjAwMCwzNDEwMDAsMC4yOTUwODE5NjcyMTMxMTQ3NSw1NAoyMDI0LTA4LTAxLDIwMjQtMDgsU2VsaW4gWcSxbG1heiwyMjEsNTUsMTYsMjgxMDAwLDMyNTAwMCwwLjI5MDkwOTA5MDkwOTA5MDksNTMKMjAyNC0wOC0wMSwyMDI0LTA4LENhbiBBcnNsYW4sMjAxLDUyLDE2LDI5NDAwMCwzMDkwMDAsMC4zMDc2OTIzMDc2OTIzMDc3LDUxCjIwMjQtMDgtMDEsMjAyNC0wOCxEZW5peiBLb8OnLDE5Myw1MiwxOCwzNDUwMDAsMjc2MDAwLDAuMzQ2MTUzODQ2MTUzODQ2MTUsNDkKMjAyNC0wOS0wMSwyMDI0LTA5LEF5xZ9lIERlbWlyLDMxNiw3NCwyMSwzMzgwMDAsNDA2MDAwLDAuMjgzNzgzNzgzNzgzNzgzNzcsNTUKMjAyNC0wOS0wMSwyMDI0LTA5LEVtcmUgS2F5YSwyNzAsNjYsMTksMzIxMDAwLDM3MTAwMCwwLjI4Nzg3ODc4Nzg3ODc4NzksNTMKMjAyNC0wOS0wMSwyMDI0LTA5LFNlbGluIFnEsWxtYXosMjM5LDYwLDE4LDMxODAwMCwzNTMwMDAsMC4zLDUyCjIwMjQtMDktMDEsMjAyNC0wOSxDYW4gQXJzbGFuLDIzOCw2MiwyMCwzNjkwMDAsMzM1MDAwLDAuMzIyNTgwNjQ1MTYxMjkwMyw1MAoyMDI0LTA5LTAxLDIwMjQtMDksRGVuaXogS2/DpywyMzEsNjIsMjIsNDI0MDAwLDMwMDAwMCwwLjM1NDgzODcwOTY3NzQxOTQsNDgKMjAyNC0xMC0wMSwyMDI0LTEwLEF5xZ9lIERlbWlyLDMxNCw3NCwyMSwzNDIwMDAsNDMwMDAwLDAuMjgzNzgzNzgzNzgzNzgzNzcsNTQKMjAyNC0xMC0wMSwyMDI0LTEwLEVtcmUgS2F5YSwyNjIsNjQsMTgsMzA3MDAwLDM5MzAwMCwwLjI4MTI1LDUyCjIwMjQtMTAtMDEsMjAyNC0xMCxTZWxpbiBZxLFsbWF6LDI1Miw2MywxOSwzNDAwMDAsMzc0MDAwLDAuMzAxNTg3MzAxNTg3MzAxNTcsNTEKMjAyNC0xMC0wMSwyMDI0LTEwLENhbiBBcnNsYW4sMjYyLDY4LDIyLDQxMTAwMCwzNTUwMDAsMC4zMjM1Mjk0MTE3NjQ3MDU5LDQ5CjIwMjQtMTAtMDEsMjAyNC0xMCxEZW5peiBLb8OnLDIzOSw2NCwyMyw0NDgwMDAsMzE4MDAwLDAuMzU5Mzc1LDQ3CjIwMjQtMTEtMDEsMjAyNC0xMSxBecWfZSBEZW1pciwyOTIsNjksMTksMzEzMDAwLDQ1MTAwMCwwLjI3NTM2MjMxODg0MDU3OTcsNTMKMjAyNC0xMS0wMSwyMDI0LTExLEVtcmUgS2F5YSwyNTksNjMsMTgsMzExMDAwLDQxMTAwMCwwLjI4NTcxNDI4NTcxNDI4NTcsNTEKMjAyNC0xMS0wMSwyMDI0LTExLFNlbGluIFnEsWxtYXosMjY4LDY3LDIwLDM2MjAwMCwzOTIwMDAsMC4yOTg1MDc0NjI2ODY1NjcxNCw0OQoyMDI0LTExLTAxLDIwMjQtMTEsQ2FuIEFyc2xhbiwyNjgsNjksMjMsNDM0MDAwLDM3MjAwMCwwLjMzMzMzMzMzMzMzMzMzMzMsNDgKMjAyNC0xMS0wMSwyMDI0LTExLERlbml6IEtvw6csMjI2LDYwLDIyLDQzMzAwMCwzMzMwMDAsMC4zNjY2NjY2NjY2NjY2NjY2NCw0NgoyMDI0LTEyLTAxLDIwMjQtMTIsQXnFn2UgRGVtaXIsMzAyLDcxLDE5LDMxNjAwMCw0NzUwMDAsMC4yNjc2MDU2MzM4MDI4MTY5LDUzCjIwMjQtMTItMDEsMjAyNC0xMixFbXJlIEtheWEsMjkzLDcxLDIwLDM0OTAwMCw0MzQwMDAsMC4yODE2OTAxNDA4NDUwNzA0NCw1MQoyMDI0LTEyLTAxLDIwMjQtMTIsU2VsaW4gWcSxbG1heiwzMDEsNzYsMjMsNDIwMDAwLDQxMzAwMCwwLjMwMjYzMTU3ODk0NzM2ODQsNDkKMjAyNC0xMi0wMSwyMDI0LTEyLENhbiBBcnNsYW4sMjc3LDcyLDI0LDQ1ODAwMCwzOTMwMDAsMC4zMzMzMzMzMzMzMzMzMzMzLDQ4CjIwMjQtMTItMDEsMjAyNC0xMixEZW5peiBLb8OnLDIyNyw2MSwyMiw0MzgwMDAsMzUxMDAwLDAuMzYwNjU1NzM3NzA0OTE4MDQsNDYKMjAyNS0wMS0wMSwyMDI1LTAxLEF5xZ9lIERlbWlyLDI3NSw2NSwxNywzMDcwMDAsNDM3MDAwLDAuMjYxNTM4NDYxNTM4NDYxNTUsNTAKMjAyNS0wMS0wMSwyMDI1LTAxLEVtcmUgS2F5YSwyNzQsNjcsMTksMzU5MDAwLDM5OTAwMCwwLjI4MzU4MjA4OTU1MjIzODgsNDgKMjAyNS0wMS0wMSwyMDI1LTAxLFNlbGluIFnEsWxtYXosMjYyLDY2LDIwLDM5NjAwMCwzODAwMDAsMC4zMDMwMzAzMDMwMzAzMDMwNCw0NgoyMDI1LTAxLTAxLDIwMjUtMDEsQ2FuIEFyc2xhbiwyMjgsNTksMjAsNDE0MDAwLDM2MTAwMCwwLjMzODk4MzA1MDg0NzQ1NzYsNDUKMjAyNS0wMS0wMSwyMDI1LTAxLERlbml6IEtvw6csMTk3LDUzLDE5LDQxMDAwMCwzMjMwMDAsMC4zNTg0OTA1NjYwMzc3MzU4LDQzCjIwMjUtMDItMDEsMjAyNS0wMixBecWfZSBEZW1pciwyOTMsNjksMTgsMzI1MDAwLDQ1MTAwMCwwLjI2MDg2OTU2NTIxNzM5MTMsNTEKMjAyNS0wMi0wMSwyMDI1LTAyLEVtcmUgS2F5YSwyNzgsNjgsMTksMzU5MDAwLDQxMjAwMCwwLjI3OTQxMTc2NDcwNTg4MjM2LDQ5CjIwMjUtMDItMDEsMjAyNS0wMixTZWxpbiBZxLFsbWF6LDI0Niw2MiwyMCwzOTYwMDAsMzkzMDAwLDAuMzIyNTgwNjQ1MTYxMjkwMyw0NwoyMDI1LTAyLTAxLDIwMjUtMDIsQ2FuIEFyc2xhbiwyMTksNTcsMjAsNDE0MDAwLDM3MzAwMCwwLjM1MDg3NzE5Mjk4MjQ1NjEsNDYKMjAyNS0wMi0wMSwyMDI1LTAyLERlbml6IEtvw6csMjA3LDU1LDIwLDQzMTAwMCwzMzQwMDAsMC4zNjM2MzYzNjM2MzYzNjM2NSw0NAoyMDI1LTAzLTAxLDIwMjUtMDMsQXnFn2UgRGVtaXIsMzE2LDc0LDE5LDM0MTAwMCw0NzgwMDAsMC4yNTY3NTY3NTY3NTY3NTY3NCw1MgoyMDI1LTAzLTAxLDIwMjUtMDMsRW1yZSBLYXlhLDI3Niw2NywxOSwzNTgwMDAsNDM2MDAwLDAuMjgzNTgyMDg5NTUyMjM4OCw1MAoyMDI1LTAzLTAxLDIwMjUtMDMsU2VsaW4gWcSxbG1heiwyNDEsNjAsMTksMzc0MDAwLDQxNjAwMCwwLjMxNjY2NjY2NjY2NjY2NjY1LDQ4CjIwMjUtMDMtMDEsMjAyNS0wMyxDYW4gQXJzbGFuLDIzNCw2MSwyMSw0MzIwMDAsMzk1MDAwLDAuMzQ0MjYyMjk1MDgxOTY3Miw0NwoyMDI1LTAzLTAxLDIwMjUtMDMsRGVuaXogS2/DpywyMjksNjEsMjIsNDcyMDAwLDM1MzAwMCwwLjM2MDY1NTczNzcwNDkxODA0LDQ1CjIwMjUtMDQtMDEsMjAyNS0wNCxBecWfZSBEZW1pciwzMzQsNzgsMjAsMzU1MDAwLDQ5MjAwMCwwLjI1NjQxMDI1NjQxMDI1NjQsNTQKMjAyNS0wNC0wMSwyMDI1LTA0LEVtcmUgS2F5YSwyNzgsNjgsMjAsMzcyMDAwLDQ0OTAwMCwwLjI5NDExNzY0NzA1ODgyMzU0LDUyCjIwMjUtMDQtMDEsMjAyNS0wNCxTZWxpbiBZxLFsbWF6LDI2MSw2NiwyMiw0MjkwMDAsNDI4MDAwLDAuMzMzMzMzMzMzMzMzMzMzMyw1MQoyMDI1LTA0LTAxLDIwMjUtMDQsQ2FuIEFyc2xhbiwyNzAsNzAsMjUsNTA5MDAwLDQwNzAwMCwwLjM1NzE0Mjg1NzE0Mjg1NzE1LDQ5CjIwMjUtMDQtMDEsMjAyNS0wNCxEZW5peiBLb8OnLDI1Miw2NywyNCw1MTAwMDAsMzY0MDAwLDAuMzU4MjA4OTU1MjIzODgwNiw0NwoyMDI1LTA1LTAxLDIwMjUtMDUsQXnFn2UgRGVtaXIsMzI2LDc3LDIwLDM1MTAwMCw1MDEwMDAsMC4yNTk3NDAyNTk3NDAyNTk3LDU1CjIwMjUtMDUtMDEsMjAyNS0wNSxFbXJlIEtheWEsMjgzLDY5LDIxLDM4NzAwMCw0NTgwMDAsMC4zMDQzNDc4MjYwODY5NTY1NCw1MwoyMDI1LTA1LTAxLDIwMjUtMDUsU2VsaW4gWcSxbG1heiwyODksNzMsMjQsNDYzMDAwLDQzNjAwMCwwLjMyODc2NzEyMzI4NzY3MTIsNTIKMjAyNS0wNS0wMSwyMDI1LTA1LENhbiBBcnNsYW4sMjk0LDc2LDI3LDU0NDAwMCw0MTQwMDAsMC4zNTUyNjMxNTc4OTQ3MzY4NCw1MAoyMDI1LTA1LTAxLDIwMjUtMDUsRGVuaXogS2/DpywyNTMsNjgsMjQsNTA0MDAwLDM3MDAwMCwwLjM1Mjk0MTE3NjQ3MDU4ODI2LDQ4CjIwMjUtMDYtMDEsMjAyNS0wNixBecWfZSBEZW1pciwyODQsNjcsMTgsMzEzMDAwLDQ3MzAwMCwwLjI2ODY1NjcxNjQxNzkxMDQ1LDU2CjIwMjUtMDYtMDEsMjAyNS0wNixFbXJlIEtheWEsMjcwLDY2LDIwLDM2NTAwMCw0MzIwMDAsMC4zMDMwMzAzMDMwMzAzMDMwNCw1NAoyMDI1LTA2LTAxLDIwMjUtMDYsU2VsaW4gWcSxbG1heiwyODAsNzAsMjMsNDM5MDAwLDQxMTAwMCwwLjMyODU3MTQyODU3MTQyODU3LDUzCjIwMjUtMDYtMDEsMjAyNS0wNixDYW4gQXJzbGFuLDI2NCw2OCwyMyw0NTkwMDAsMzkwMDAwLDAuMzM4MjM1Mjk0MTE3NjQ3MSw1MQoyMDI1LTA2LTAxLDIwMjUtMDYsRGVuaXogS2/DpywyMTYsNTgsMjAsNDE2MDAwLDM0OTAwMCwwLjM0NDgyNzU4NjIwNjg5NjYsNDkKMjAyNS0wNy0wMSwyMDI1LTA3LEF5xZ9lIERlbWlyLDI3MCw2MywxNywyOTIwMDAsNDQwMDAwLDAuMjY5ODQxMjY5ODQxMjY5OCw1NgoyMDI1LTA3LTAxLDIwMjUtMDcsRW1yZSBLYXlhLDI3MCw2NiwyMCwzNjEwMDAsNDAyMDAwLDAuMzAzMDMwMzAzMDMwMzAzMDQsNTQKMjAyNS0wNy0wMSwyMDI1LTA3LFNlbGluIFnEsWxtYXosMjY0LDY2LDIyLDQxNjAwMCwzODMwMDAsMC4zMzMzMzMzMzMzMzMzMzMzLDUzCjIwMjUtMDctMDEsMjAyNS0wNyxDYW4gQXJzbGFuLDIzMiw2MCwyMCwzOTUwMDAsMzY0MDAwLDAuMzMzMzMzMzMzMzMzMzMzMyw1MQoyMDI1LTA3LTAxLDIwMjUtMDcsRGVuaXogS2/DpywxOTYsNTIsMTgsMzcwMDAwLDMyNTAwMCwwLjM0NjE1Mzg0NjE1Mzg0NjE1LDQ5CjIwMjUtMDgtMDEsMjAyNS0wOCxBecWfZSBEZW1pciwzMDgsNzIsMjAsMzQ0MDAwLDQ0OTAwMCwwLjI3Nzc3Nzc3Nzc3Nzc3NzgsNTYKMjAyNS0wOC0wMSwyMDI1LTA4LEVtcmUgS2F5YSwyOTgsNzIsMjMsNDE1MDAwLDQxMDAwMCwwLjMxOTQ0NDQ0NDQ0NDQ0NDQsNTQKMjAyNS0wOC0wMSwyMDI1LTA4LFNlbGluIFnEsWxtYXosMjY5LDY4LDIzLDQzNDAwMCwzOTEwMDAsMC4zMzgyMzUyOTQxMTc2NDcxLDUzCjIwMjUtMDgtMDEsMjAyNS0wOCxDYW4gQXJzbGFuLDIzNSw2MSwyMCwzOTUwMDAsMzcxMDAwLDAuMzI3ODY4ODUyNDU5MDE2MzcsNTEKMjAyNS0wOC0wMSwyMDI1LTA4LERlbml6IEtvw6csMjE3LDU4LDE5LDM5MTAwMCwzMzIwMDAsMC4zMjc1ODYyMDY4OTY1NTE3LDQ5CjIwMjUtMDktMDEsMjAyNS0wOSxBecWfZSBEZW1pciwzNDgsODIsMjQsNDE1MDAwLDQ4OTAwMCwwLjI5MjY4MjkyNjgyOTI2ODMsNTUKMjAyNS0wOS0wMSwyMDI1LTA5LEVtcmUgS2F5YSwzMTAsNzUsMjQsNDM1MDAwLDQ0NjAwMCwwLjMyLDUzCjIwMjUtMDktMDEsMjAyNS0wOSxTZWxpbiBZxLFsbWF6LDI3MCw2OCwyMiw0MTgwMDAsNDI1MDAwLDAuMzIzNTI5NDExNzY0NzA1OSw1MgoyMDI1LTA5LTAxLDIwMjUtMDksQ2FuIEFyc2xhbiwyNTUsNjYsMjIsNDM2MDAwLDQwNDAwMCwwLjMzMzMzMzMzMzMzMzMzMzMsNTAKMjAyNS0wOS0wMSwyMDI1LTA5LERlbml6IEtvw6csMjQ5LDY2LDIyLDQ1NTAwMCwzNjEwMDAsMC4zMzMzMzMzMzMzMzMzMzMzLDQ4CjIwMjUtMTAtMDEsMjAyNS0xMCxBecWfZSBEZW1pciwzNDksODIsMjQsNDE3MDAwLDUxNTAwMCwwLjI5MjY4MjkyNjgyOTI2ODMsNTQKMjAyNS0xMC0wMSwyMDI1LTEwLEVtcmUgS2F5YSwyOTIsNzEsMjIsNDAxMDAwLDQ3MDAwMCwwLjMwOTg1OTE1NDkyOTU3NzQ0LDUyCjIwMjUtMTAtMDEsMjAyNS0xMCxTZWxpbiBZxLFsbWF6LDI2Nyw2NywyMiw0MjAwMDAsNDQ3MDAwLDAuMzI4MzU4MjA4OTU1MjIzOSw1MQoyMDI1LTEwLTAxLDIwMjUtMTAsQ2FuIEFyc2xhbiwyNzMsNzEsMjMsNDU5MDAwLDQyNTAwMCwwLjMyMzk0MzY2MTk3MTgzMSw0OQoyMDI1LTEwLTAxLDIwMjUtMTAsRGVuaXogS2/DpywyNjAsNjksMjMsNDc4MDAwLDM4MDAwMCwwLjMzMzMzMzMzMzMzMzMzMzMsNDcKMjAyNS0xMS0wMSwyMDI1LTExLEF5xZ9lIERlbWlyLDM0Nyw4MiwyNCw0MjQwMDAsNTQxMDAwLDAuMjkyNjgyOTI2ODI5MjY4Myw1MwoyMDI1LTExLTAxLDIwMjUtMTEsRW1yZSBLYXlhLDI5NSw3MiwyMyw0MjYwMDAsNDk0MDAwLDAuMzE5NDQ0NDQ0NDQ0NDQ0NCw1MQoyMDI1LTExLTAxLDIwMjUtMTEsU2VsaW4gWcSxbG1heiwyOTUsNzQsMjMsNDQ2MDAwLDQ3MTAwMCwwLjMxMDgxMDgxMDgxMDgxMDgsNDkKMjAyNS0xMS0wMSwyMDI1LTExLENhbiBBcnNsYW4sMzA0LDc5LDI1LDUwNjAwMCw0NDcwMDAsMC4zMTY0NTU2OTYyMDI1MzE2Nyw0OAoyMDI1LTExLTAxLDIwMjUtMTEsRGVuaXogS2/DpywyNjgsNzIsMjQsNTA3MDAwLDQwMDAwMCwwLjMzMzMzMzMzMzMzMzMzMzMsNDYKMjAyNS0xMi0wMSwyMDI1LTEyLEF5xZ9lIERlbWlyLDM1MSw4MiwyNSw0NDYwMDAsNTcxMDAwLDAuMzA0ODc4MDQ4NzgwNDg3OCw1MQoyMDI1LTEyLTAxLDIwMjUtMTIsRW1yZSBLYXlhLDMyNSw3OSwyNSw0NjgwMDAsNTIxMDAwLDAuMzE2NDU1Njk2MjAyNTMxNjcsNDkKMjAyNS0xMi0wMSwyMDI1LTEyLFNlbGluIFnEsWxtYXosMzM5LDg1LDI2LDUwOTAwMCw0OTYwMDAsMC4zMDU4ODIzNTI5NDExNzY1LDQ3CjIwMjUtMTItMDEsMjAyNS0xMixDYW4gQXJzbGFuLDMyNyw4NSwyNyw1NTMwMDAsNDcyMDAwLDAuMzE3NjQ3MDU4ODIzNTI5NCw0NgoyMDI1LTEyLTAxLDIwMjUtMTIsRGVuaXogS2/DpywyNzAsNzIsMjQsNTEyMDAwLDQyMjAwMCwwLjMzMzMzMzMzMzMzMzMzMzMsNDQKMjAyNi0wMS0wMSwyMDI2LTAxLEF5xZ9lIERlbWlyLDI4Nyw2NywyMCwzODUwMDAsNTE2MDAwLDAuMjk4NTA3NDYyNjg2NTY3MTQsNDYKMjAyNi0wMS0wMSwyMDI2LTAxLEVtcmUgS2F5YSwyODUsNjksMjEsNDI0MDAwLDQ3MTAwMCwwLjMwNDM0NzgyNjA4Njk1NjU0LDQ1CjIwMjYtMDEtMDEsMjAyNi0wMSxTZWxpbiBZxLFsbWF6LDI4NSw3MiwyMiw0NjQwMDAsNDQ5MDAwLDAuMzA1NTU1NTU1NTU1NTU1Niw0MwoyMDI2LTAxLTAxLDIwMjYtMDEsQ2FuIEFyc2xhbiwyNTUsNjYsMjEsNDYzMDAwLDQyNzAwMCwwLjMxODE4MTgxODE4MTgxODIsNDIKMjAyNi0wMS0wMSwyMDI2LTAxLERlbml6IEtvw6csMjExLDU2LDE5LDQzNzAwMCwzODIwMDAsMC4zMzkyODU3MTQyODU3MTQzLDQwCjIwMjYtMDItMDEsMjAyNi0wMixBecWfZSBEZW1pciwzMDUsNzIsMjEsNDA0MDAwLDUzMzAwMCwwLjI5MTY2NjY2NjY2NjY2NjcsNDYKMjAyNi0wMi0wMSwyMDI2LTAyLEVtcmUgS2F5YSwzMDAsNzMsMjIsNDQ0MDAwLDQ4NzAwMCwwLjMwMTM2OTg2MzAxMzY5ODYsNDUKMjAyNi0wMi0wMSwyMDI2LTAyLFNlbGluIFnEsWxtYXosMjc2LDY5LDIxLDQ0MzAwMCw0NjQwMDAsMC4zMDQzNDc4MjYwODY5NTY1NCw0MwoyMDI2LTAyLTAxLDIwMjYtMDIsQ2FuIEFyc2xhbiwyNDAsNjIsMTksNDE5MDAwLDQ0MTAwMCwwLjMwNjQ1MTYxMjkwMzIyNTgsNDIKMjAyNi0wMi0wMSwyMDI2LTAyLERlbml6IEtvw6csMjE2LDU4LDIwLDQ2MDAwMCwzOTQwMDAsMC4zNDQ4Mjc1ODYyMDY4OTY2LDQwCjIwMjYtMDMtMDEsMjAyNi0wMyxBecWfZSBEZW1pciwzNTYsODQsMjUsNDgxMDAwLDU2NzAwMCwwLjI5NzYxOTA0NzYxOTA0NzYsNDYKMjAyNi0wMy0wMSwyMDI2LTAzLEVtcmUgS2F5YSwzMjUsNzksMjMsNDY0MDAwLDUxODAwMCwwLjI5MTEzOTI0MDUwNjMyOTEsNDUKMjAyNi0wMy0wMSwyMDI2LTAzLFNlbGluIFnEsWxtYXosMjg0LDcxLDIxLDQ0MzAwMCw0OTMwMDAsMC4yOTU3NzQ2NDc4ODczMjM5NCw0MwoyMDI2LTAzLTAxLDIwMjYtMDMsQ2FuIEFyc2xhbiwyNjEsNjgsMjEsNDYzMDAwLDQ2OTAwMCwwLjMwODgyMzUyOTQxMTc2NDcsNDIKMjAyNi0wMy0wMSwyMDI2LTAzLERlbml6IEtvw6csMjUzLDY4LDI0LDU1MjAwMCw0MTkwMDAsMC4zNTI5NDExNzY0NzA1ODgyNiw0MAoyMDI2LTA0LTAxLDIwMjYtMDQsQXnFn2UgRGVtaXIsMzgyLDkwLDI2LDQ5ODAwMCw1ODcwMDAsMC4yODg4ODg4ODg4ODg4ODg4Niw0OAoyMDI2LTA0LTAxLDIwMjYtMDQsRW1yZSBLYXlhLDMyNCw3OSwyMyw0NjIwMDAsNTM2MDAwLDAuMjkxMTM5MjQwNTA2MzI5MSw0NgoyMDI2LTA0LTAxLDIwMjYtMDQsU2VsaW4gWcSxbG1heiwyOTAsNzMsMjEsNDQxMDAwLDUxMTAwMCwwLjI4NzY3MTIzMjg3NjcxMjMsNDQKMjAyNi0wNC0wMSwyMDI2LTA0LENhbiBBcnNsYW4sMjkxLDc1LDI0LDUyNzAwMCw0ODUwMDAsMC4zMiw0MwoyMDI2LTA0LTAxLDIwMjYtMDQsRGVuaXogS2/DpywyODIsNzUsMjcsNjE4MDAwLDQzNDAwMCwwLjM2LDQxCjIwMjYtMDUtMDEsMjAyNi0wNSxBecWfZSBEZW1pciwzNjMsODUsMjQsNDU1MDAwLDU5ODAwMCwwLjI4MjM1Mjk0MTE3NjQ3MDYsNDkKMjAyNi0wNS0wMSwyMDI2LTA1LEVtcmUgS2F5YSwzMDUsNzQsMjEsNDE3MDAwLDU0NjAwMCwwLjI4Mzc4Mzc4Mzc4Mzc4Mzc3LDQ3CjIwMjYtMDUtMDEsMjAyNi0wNSxTZWxpbiBZxLFsbWF6LDI5Nyw3NSwyMiw0NTgwMDAsNTIwMDAwLDAuMjkzMzMzMzMzMzMzMzMzMzMsNDUKMjAyNi0wNS0wMSwyMDI2LTA1LENhbiBBcnNsYW4sMzA5LDgwLDI2LDU2NTAwMCw0OTQwMDAsMC4zMjUsNDQKMjAyNi0wNS0wMSwyMDI2LTA1LERlbml6IEtvw6csMjc4LDc0LDI3LDYxMjAwMCw0NDIwMDAsMC4zNjQ4NjQ4NjQ4NjQ4NjQ4Niw0MgoyMDI2LTA2LTAxLDIwMjYtMDYsQXnFn2UgRGVtaXIsMzIwLDc1LDIxLDM5MjAwMCw1NjIwMDAsMC4yOCw1MAoyMDI2LTA2LTAxLDIwMjYtMDYsRW1yZSBLYXlhLDI4OSw3MCwxOSwzNzIwMDAsNTEzMDAwLDAuMjcxNDI4NTcxNDI4NTcxNCw0OAoyMDI2LTA2LTAxLDIwMjYtMDYsU2VsaW4gWcSxbG1heiwzMDAsNzUsMjIsNDUxMDAwLDQ4OTAwMCwwLjI5MzMzMzMzMzMzMzMzMzMzLDQ2CjIwMjYtMDYtMDEsMjAyNi0wNixDYW4gQXJzbGFuLDI5Nyw3NywyNiw1NTcwMDAsNDY0MDAwLDAuMzM3NjYyMzM3NjYyMzM3NjYsNDUKMjAyNi0wNi0wMSwyMDI2LTA2LERlbml6IEtvw6csMjQ4LDY2LDI0LDUzNjAwMCw0MTUwMDAsMC4zNjM2MzYzNjM2MzYzNjM2NSw0MwoyMDI2LTA3LTAxLDIwMjYtMDcsQXnFn2UgRGVtaXIsMzA2LDcyLDE5LDM1MzAwMCw1MjYwMDAsMC4yNjM4ODg4ODg4ODg4ODg5LDUxCjIwMjYtMDctMDEsMjAyNi0wNyxFbXJlIEtheWEsMzAwLDczLDIwLDM5MDAwMCw0ODAwMDAsMC4yNzM5NzI2MDI3Mzk3MjYsNDkKMjAyNi0wNy0wMSwyMDI2LTA3LFNlbGluIFnEsWxtYXosMzA2LDc3LDIzLDQ2OTAwMCw0NTgwMDAsMC4yOTg3MDEyOTg3MDEyOTg3LDQ3CjIwMjYtMDctMDEsMjAyNi0wNyxDYW4gQXJzbGFuLDI3OCw3MiwyNCw1MTEwMDAsNDM1MDAwLDAuMzMzMzMzMzMzMzMzMzMzMyw0NgoyMDI2LTA3LTAxLDIwMjYtMDcsRGVuaXogS2/DpywyMjgsNjEsMjIsNDg5MDAwLDM4OTAwMCwwLjM2MDY1NTczNzcwNDkxODA0LDQ0CjIwMjYtMDgtMDEsMjAyNi0wOCxBecWfZSBEZW1pciwzMjYsNzcsMjAsMzcwMDAwLDUzNTAwMCwwLjI1OTc0MDI1OTc0MDI1OTcsNTIKMjAyNi0wOC0wMSwyMDI2LTA4LEVtcmUgS2F5YSwzMjQsNzksMjIsNDI3MDAwLDQ4ODAwMCwwLjI3ODQ4MTAxMjY1ODIyNzgzLDUwCjIwMjYtMDgtMDEsMjAyNi0wOCxTZWxpbiBZxLFsbWF6LDMwNiw3NywyNCw0ODcwMDAsNDY1MDAwLDAuMzExNjg4MzExNjg4MzExNyw0OAoyMDI2LTA4LTAxLDIwMjYtMDgsQ2FuIEFyc2xhbiwyNjYsNjksMjQsNTA5MDAwLDQ0MjAwMCwwLjM0NzgyNjA4Njk1NjUyMTczLDQ3CjIwMjYtMDgtMDEsMjAyNi0wOCxEZW5peiBLb8OnLDIzMyw2MiwyMyw1MDkwMDAsMzk1MDAwLDAuMzcwOTY3NzQxOTM1NDgzOSw0NQoyMDI2LTA5LTAxLDIwMjYtMDksQXnFn2UgRGVtaXIsMzYzLDg1LDIyLDQwNzAwMCw1NzgwMDAsMC4yNTg4MjM1Mjk0MTE3NjQ3Myw1MwoyMDI2LTA5LTAxLDIwMjYtMDksRW1yZSBLYXlhLDMzOSw4MiwyMyw0NDYwMDAsNTI4MDAwLDAuMjgwNDg3ODA0ODc4MDQ4OCw1MQoyMDI2LTA5LTAxLDIwMjYtMDksU2VsaW4gWcSxbG1heiwyOTksNzUsMjQsNDg3MDAwLDUwMzAwMCwwLjMyLDQ5CjIwMjYtMDktMDEsMjAyNi0wOSxDYW4gQXJzbGFuLDI2OCw2OSwyNCw1MDkwMDAsNDc4MDAwLDAuMzQ3ODI2MDg2OTU2NTIxNzMsNDgKMjAyNi0wOS0wMSwyMDI2LTA5LERlbml6IEtvw6csMjU2LDY4LDI1LDU1MzAwMCw0MjgwMDAsMC4zNjc2NDcwNTg4MjM1Mjk0NCw0NgoyMDI2LTEwLTAxLDIwMjYtMTAsQXnFn2UgRGVtaXIsMzk2LDkzLDI0LDQ0NjAwMCw2MDkwMDAsMC4yNTgwNjQ1MTYxMjkwMzIyNSw1MwoyMDI2LTEwLTAxLDIwMjYtMTAsRW1yZSBLYXlhLDM0MSw4MywyNCw0NjgwMDAsNTU2MDAwLDAuMjg5MTU2NjI2NTA2MDI0MSw1MQoyMDI2LTEwLTAxLDIwMjYtMTAsU2VsaW4gWcSxbG1heiwzMDAsNzUsMjQsNDkwMDAwLDUyOTAwMCwwLjMyLDQ5CjIwMjYtMTAtMDEsMjAyNi0xMCxDYW4gQXJzbGFuLDI5NSw3NiwyNyw1NzUwMDAsNTAzMDAwLDAuMzU1MjYzMTU3ODk0NzM2ODQsNDgKMjAyNi0xMC0wMSwyMDI2LTEwLERlbml6IEtvw6csMjg4LDc3LDI4LDYyMjAwMCw0NTAwMDAsMC4zNjM2MzYzNjM2MzYzNjM2NSw0NgoyMDI2LTExLTAxLDIwMjYtMTEsQXnFn2UgRGVtaXIsNDEwLDk2LDI1LDQ2OTAwMCw2MzcwMDAsMC4yNjA0MTY2NjY2NjY2NjY3LDUyCjIwMjYtMTEtMDEsMjAyNi0xMSxFbXJlIEtheWEsMzQyLDgzLDI0LDQ3MjAwMCw1ODEwMDAsMC4yODkxNTY2MjY1MDYwMjQxLDUwCjIwMjYtMTEtMDEsMjAyNi0xMSxTZWxpbiBZxLFsbWF6LDMyNSw4MiwyNyw1NTYwMDAsNTU0MDAwLDAuMzI5MjY4MjkyNjgyOTI2ODQsNDgKMjAyNi0xMS0wMSwyMDI2LTExLENhbiBBcnNsYW4sMzM4LDg4LDMxLDY2NzAwMCw1MjYwMDAsMC4zNTIyNzI3MjcyNzI3MjczLDQ3CjIwMjYtMTEtMDEsMjAyNi0xMSxEZW5peiBLb8OnLDMxMiw4MywyOSw2NTEwMDAsNDcxMDAwLDAuMzQ5Mzk3NTkwMzYxNDQ1OCw0NQoyMDI2LTEyLTAxLDIwMjYtMTIsQXnFn2UgRGVtaXIsMzkzLDkyLDI0LDQ1NTAwMCw2NzEwMDAsMC4yNjA4Njk1NjUyMTczOTEzLDUxCjIwMjYtMTItMDEsMjAyNi0xMixFbXJlIEtheWEsMzQ1LDg0LDI1LDQ5NzAwMCw2MTMwMDAsMC4yOTc2MTkwNDc2MTkwNDc2LDQ5CjIwMjYtMTItMDEsMjAyNi0xMixTZWxpbiBZxLFsbWF6LDM1NSw4OSwzMCw2MjQwMDAsNTgzMDAwLDAuMzM3MDc4NjUxNjg1MzkzMjUsNDcKMjAyNi0xMi0wMSwyMDI2LTEyLENhbiBBcnNsYW4sMzU4LDkzLDMyLDY5NTAwMCw1NTQwMDAsMC4zNDQwODYwMjE1MDUzNzYzNyw0NgoyMDI2LTEyLTAxLDIwMjYtMTIsRGVuaXogS2/DpywzMDUsODEsMjgsNjM0MDAwLDQ5NjAwMCwwLjM0NTY3OTAxMjM0NTY3OSw0NAo=\", BinaryEncoding.Base64),",
+                "    Source = Csv.Document(Binary, [Delimiter=\",\", Columns=10, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"Month\", type date}, {\"Month Key\", type text}, {\"Sales Rep\", type text}, {\"New Leads\", Int64.Type}, {\"Opportunities\", Int64.Type}, {\"Won Deals\", Int64.Type}, {\"Won Revenue\", type number}, {\"Revenue Target\", type number}, {\"Win Rate\", type number}, {\"Sales Cycle Days\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "crm_lead_sources",
+        "columns": [
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "UnderlyingDateTimeDataType",
+                "value": "Date"
+              },
+              {
+                "name": "SummarizationSetBy",
+                "value": "Automatic"
+              }
+            ],
+            "dataType": "dateTime",
+            "formatString": "mmm yyyy",
+            "lineageTag": "35fd61c3-6724-43c1-a0cc-70ada7181197",
+            "sourceColumn": "Month",
+            "summarizeBy": "none"
+          },
+          {
+            "name": "Month Key",
+            "dataType": "string",
+            "lineageTag": "ae35d38e-e373-46bc-b1ed-b5f6aa967459",
+            "sourceColumn": "Month Key"
+          },
+          {
+            "name": "Lead Source",
+            "dataType": "string",
+            "lineageTag": "6c459333-a1e0-40cd-8397-49752f0d647c",
+            "sourceColumn": "Lead Source"
+          },
+          {
+            "name": "New Leads",
+            "dataType": "int64",
+            "lineageTag": "af88a043-5933-478f-b9c5-c8146546bf18",
+            "sourceColumn": "New Leads"
+          },
+          {
+            "name": "Qualified Leads",
+            "dataType": "int64",
+            "lineageTag": "948e4e7c-b6ba-4484-8a81-ca88654ac353",
+            "sourceColumn": "Qualified Leads"
+          },
+          {
+            "name": "Qualification Rate",
+            "dataType": "double",
+            "lineageTag": "e29d4704-dfc3-45ca-88b9-e5e8e0041279",
+            "sourceColumn": "Qualification Rate"
+          },
+          {
+            "name": "Acquisition Spend",
+            "dataType": "double",
+            "lineageTag": "563f9f90-895a-470d-bbbb-764b5fd04d3f",
+            "sourceColumn": "Acquisition Spend"
+          }
+        ],
+        "lineageTag": "3ed5d540-131c-49c9-85c6-d08028c0fe9d",
+        "measures": [
+          {
+            "name": "Source New Leads",
+            "expression": "SUM(crm_lead_sources[New Leads])",
+            "formatString": "#,0",
+            "lineageTag": "0c8e8d6e-f809-49d9-bcbc-c9c309214a6d"
+          },
+          {
+            "name": "Source Qualified Leads",
+            "expression": "SUM(crm_lead_sources[Qualified Leads])",
+            "formatString": "#,0",
+            "lineageTag": "e166b144-a65c-40c4-a88a-2303d2b8f3e2"
+          },
+          {
+            "name": "Source Qualification Rate",
+            "expression": "DIVIDE([Source Qualified Leads],[Source New Leads],0)",
+            "formatString": "0.0%",
+            "lineageTag": "1fc6ac83-e5d1-4d82-b34f-c42c411776fc"
+          },
+          {
+            "name": "Source Acquisition Spend",
+            "expression": "SUM(crm_lead_sources[Acquisition Spend])",
+            "formatString": "₺#,0",
+            "lineageTag": "bbab7d88-9f7c-4ca3-a936-d822eb15a283"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "crm_lead_sources",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Binary = Binary.FromText(\"TW9udGgsTW9udGggS2V5LExlYWQgU291cmNlLE5ldyBMZWFkcyxRdWFsaWZpZWQgTGVhZHMsUXVhbGlmaWNhdGlvbiBSYXRlLEFjcXVpc2l0aW9uIFNwZW5kCjIwMjQtMDEtMDEsMjAyNC0wMSxPcmdhbmljIFNlYXJjaCwzMjcsMTk5LDAuNjA4NTYyNjkxMTMxNDk4NSw1ODg2CjIwMjQtMDEtMDEsMjAyNC0wMSxQYWlkIEFkcywyNzYsMTMyLDAuNDc4MjYwODY5NTY1MjE3NCwxNzExMgoyMDI0LTAxLTAxLDIwMjQtMDEsUmVmZXJyYWwsMTg5LDEyNywwLjY3MTk1NzY3MTk1NzY3MiwyMjY4CjIwMjQtMDEtMDEsMjAyNC0wMSxFdmVudHMsMTQzLDc5LDAuNTUyNDQ3NTUyNDQ3NTUyNCwxMDU4MgoyMDI0LTAxLTAxLDIwMjQtMDEsT3V0Ym91bmQsMTQ1LDU3LDAuMzkzMTAzNDQ4Mjc1ODYyMSw1OTQ1CjIwMjQtMDItMDEsMjAyNC0wMixPcmdhbmljIFNlYXJjaCwzNDIsMjA5LDAuNjExMTExMTExMTExMTExMiw2MTU2CjIwMjQtMDItMDEsMjAyNC0wMixQYWlkIEFkcywyODEsMTM1LDAuNDgwNDI3MDQ2MjYzMzQ1MiwxNzQyMgoyMDI0LTAyLTAxLDIwMjQtMDIsUmVmZXJyYWwsMTk2LDEzMSwwLjY2ODM2NzM0NjkzODc3NTUsMjM1MgoyMDI0LTAyLTAxLDIwMjQtMDIsRXZlbnRzLDE1NSw4NSwwLjU0ODM4NzA5Njc3NDE5MzUsMTE0NzAKMjAyNC0wMi0wMSwyMDI0LTAyLE91dGJvdW5kLDE2Myw2NCwwLjM5MjYzODAzNjgwOTgxNTk2LDY2ODMKMjAyNC0wMy0wMSwyMDI0LTAzLE9yZ2FuaWMgU2VhcmNoLDMzMiwyMDMsMC42MTE0NDU3ODMxMzI1MzAyLDU5NzYKMjAyNC0wMy0wMSwyMDI0LTAzLFBhaWQgQWRzLDI3OCwxMzMsMC40Nzg0MTcyNjYxODcwNTA0LDE3MjM2CjIwMjQtMDMtMDEsMjAyNC0wMyxSZWZlcnJhbCwyMDQsMTM3LDAuNjcxNTY4NjI3NDUwOTgwMywyNDQ4CjIwMjQtMDMtMDEsMjAyNC0wMyxFdmVudHMsMTY2LDkxLDAuNTQ4MTkyNzcxMDg0MzM3NCwxMjI4NAoyMDI0LTAzLTAxLDIwMjQtMDMsT3V0Ym91bmQsMTcyLDY3LDAuMzg5NTM0ODgzNzIwOTMwMjYsNzA1MgoyMDI0LTA0LTAxLDIwMjQtMDQsT3JnYW5pYyBTZWFyY2gsMzI5LDIwMSwwLjYxMDk0MjI0OTI0MDEyMTUsNTkyMgoyMDI0LTA0LTAxLDIwMjQtMDQsUGFpZCBBZHMsMjg4LDEzOCwwLjQ3OTE2NjY2NjY2NjY2NjcsMTc4NTYKMjAyNC0wNC0wMSwyMDI0LTA0LFJlZmVycmFsLDIxOCwxNDYsMC42Njk3MjQ3NzA2NDIyMDE4LDI2MTYKMjAyNC0wNC0wMSwyMDI0LTA0LEV2ZW50cywxNzUsOTYsMC41NDg1NzE0Mjg1NzE0Mjg2LDEyOTUwCjIwMjQtMDQtMDEsMjAyNC0wNCxPdXRib3VuZCwxNzMsNjcsMC4zODcyODMyMzY5OTQyMTk2LDcwOTMKMjAyNC0wNS0wMSwyMDI0LTA1LE9yZ2FuaWMgU2VhcmNoLDM1OSwyMTksMC42MTAwMjc4NTUxNTMyMDMzLDY0NjIKMjAyNC0wNS0wMSwyMDI0LTA1LFBhaWQgQWRzLDMyNSwxNTYsMC40OCwyMDE1MAoyMDI0LTA1LTAxLDIwMjQtMDUsUmVmZXJyYWwsMjQyLDE2MiwwLjY2OTQyMTQ4NzYwMzMwNTgsMjkwNAoyMDI0LTA1LTAxLDIwMjQtMDUsRXZlbnRzLDE4NiwxMDIsMC41NDgzODcwOTY3NzQxOTM1LDEzNzY0CjIwMjQtMDUtMDEsMjAyNC0wNSxPdXRib3VuZCwxNzgsNjksMC4zODc2NDA0NDk0MzgyMDIyNSw3Mjk4CjIwMjQtMDYtMDEsMjAyNC0wNixPcmdhbmljIFNlYXJjaCwzNjMsMjIxLDAuNjA4ODE1NDI2OTk3MjQ1Miw2NTM0CjIwMjQtMDYtMDEsMjAyNC0wNixQYWlkIEFkcywzMjMsMTU1LDAuNDc5ODc2MTYwOTkwNzEyMDYsMjAwMjYKMjAyNC0wNi0wMSwyMDI0LTA2LFJlZmVycmFsLDIzMCwxNTQsMC42Njk1NjUyMTczOTEzMDQ0LDI3NjAKMjAyNC0wNi0wMSwyMDI0LTA2LEV2ZW50cywxNzIsOTUsMC41NTIzMjU1ODEzOTUzNDg4LDEyNzI4CjIwMjQtMDYtMDEsMjAyNC0wNixPdXRib3VuZCwxNjUsNjQsMC4zODc4Nzg3ODc4Nzg3ODc5LDY3NjUKMjAyNC0wNy0wMSwyMDI0LTA3LE9yZ2FuaWMgU2VhcmNoLDMzNiwyMDUsMC42MTAxMTkwNDc2MTkwNDc3LDYwNDgKMjAyNC0wNy0wMSwyMDI0LTA3LFBhaWQgQWRzLDI4NywxMzgsMC40ODA4MzYyMzY5MzM3OTc5LDE3Nzk0CjIwMjQtMDctMDEsMjAyNC0wNyxSZWZlcnJhbCwxOTgsMTMzLDAuNjcxNzE3MTcxNzE3MTcxNywyMzc2CjIwMjQtMDctMDEsMjAyNC0wNyxFdmVudHMsMTQ4LDgxLDAuNTQ3Mjk3Mjk3Mjk3Mjk3MywxMDk1MgoyMDI0LTA3LTAxLDIwMjQtMDcsT3V0Ym91bmQsMTQ4LDU4LDAuMzkxODkxODkxODkxODkxOSw2MDY4CjIwMjQtMDgtMDEsMjAyNC0wOCxPcmdhbmljIFNlYXJjaCwzNDEsMjA4LDAuNjA5OTcwNjc0NDg2ODAzNSw2MTM4CjIwMjQtMDgtMDEsMjAyNC0wOCxQYWlkIEFkcywyODEsMTM1LDAuNDgwNDI3MDQ2MjYzMzQ1MiwxNzQyMgoyMDI0LTA4LTAxLDIwMjQtMDgsUmVmZXJyYWwsMTk1LDEzMSwwLjY3MTc5NDg3MTc5NDg3MTcsMjM0MAoyMDI0LTA4LTAxLDIwMjQtMDgsRXZlbnRzLDE1Miw4NCwwLjU1MjYzMTU3ODk0NzM2ODUsMTEyNDgKMjAyNC0wOC0wMSwyMDI0LTA4LE91dGJvdW5kLDE1OSw2MiwwLjM4OTkzNzEwNjkxODIzOSw2NTE5CjIwMjQtMDktMDEsMjAyNC0wOSxPcmdhbmljIFNlYXJjaCwzNjksMjI1LDAuNjA5NzU2MDk3NTYwOTc1Niw2NjQyCjIwMjQtMDktMDEsMjAyNC0wOSxQYWlkIEFkcywzMDYsMTQ3LDAuNDgwMzkyMTU2ODYyNzQ1MSwxODk3MgoyMDI0LTA5LTAxLDIwMjQtMDksUmVmZXJyYWwsMjIxLDE0OCwwLjY2OTY4MzI1NzkxODU1MiwyNjUyCjIwMjQtMDktMDEsMjAyNC0wOSxFdmVudHMsMTgwLDk5LDAuNTUsMTMzMjAKMjAyNC0wOS0wMSwyMDI0LTA5LE91dGJvdW5kLDE4Nyw3MywwLjM5MDM3NDMzMTU1MDgwMjE0LDc2NjcKMjAyNC0xMC0wMSwyMDI0LTEwLE9yZ2FuaWMgU2VhcmNoLDM2NywyMjQsMC42MTAzNTQyMjM0MzMyNDI1LDY2MDYKMjAyNC0xMC0wMSwyMDI0LTEwLFBhaWQgQWRzLDMxNywxNTIsMC40Nzk0OTUyNjgxMzg4MDEzLDE5NjU0CjIwMjQtMTAtMDEsMjAyNC0xMCxSZWZlcnJhbCwyMzksMTYwLDAuNjY5NDU2MDY2OTQ1NjA2NywyODY4CjIwMjQtMTAtMDEsMjAyNC0xMCxFdmVudHMsMTkzLDEwNiwwLjU0OTIyMjc5NzkyNzQ2MTEsMTQyODIKMjAyNC0xMC0wMSwyMDI0LTEwLE91dGJvdW5kLDE5NCw3NiwwLjM5MTc1MjU3NzMxOTU4NzYsNzk1NAoyMDI0LTExLTAxLDIwMjQtMTEsT3JnYW5pYyBTZWFyY2gsMzY3LDIyNCwwLjYxMDM1NDIyMzQzMzI0MjUsNjYwNgoyMDI0LTExLTAxLDIwMjQtMTEsUGFpZCBBZHMsMzMwLDE1OCwwLjQ3ODc4Nzg3ODc4Nzg3ODc2LDIwNDYwCjIwMjQtMTEtMDEsMjAyNC0xMSxSZWZlcnJhbCwyNDgsMTY2LDAuNjY5MzU0ODM4NzA5Njc3NCwyOTc2CjIwMjQtMTEtMDEsMjAyNC0xMSxFdmVudHMsMTkzLDEwNiwwLjU0OTIyMjc5NzkyNzQ2MTEsMTQyODIKMjAyNC0xMS0wMSwyMDI0LTExLE91dGJvdW5kLDE4Niw3MywwLjM5MjQ3MzExODI3OTU2OTksNzYyNgoyMDI0LTEyLTAxLDIwMjQtMTIsT3JnYW5pYyBTZWFyY2gsNDA5LDI0OSwwLjYwODgwMTk1NTk5MDIyLDczNjIKMjAyNC0xMi0wMSwyMDI0LTEyLFBhaWQgQWRzLDM2NywxNzYsMC40Nzk1NjQwMzI2OTc1NDc2NiwyMjc1NAoyMDI0LTEyLTAxLDIwMjQtMTIsUmVmZXJyYWwsMjY1LDE3OCwwLjY3MTY5ODExMzIwNzU0NzEsMzE4MAoyMDI0LTEyLTAxLDIwMjQtMTIsRXZlbnRzLDE5OSwxMDksMC41NDc3Mzg2OTM0NjczMzY3LDE0NzI2CjIwMjQtMTItMDEsMjAyNC0xMixPdXRib3VuZCwxOTAsNzQsMC4zODk0NzM2ODQyMTA1MjYzLDc3OTAKMjAyNS0wMS0wMSwyMDI1LTAxLE9yZ2FuaWMgU2VhcmNoLDM3NSwyMjksMC42MTA2NjY2NjY2NjY2NjY3LDY5ODYKMjAyNS0wMS0wMSwyMDI1LTAxLFBhaWQgQWRzLDMyNCwxNTYsMC40ODE0ODE0ODE0ODE0ODE0NSwyMDc5MQoyMDI1LTAxLTAxLDIwMjUtMDEsUmVmZXJyYWwsMjI1LDE1MSwwLjY3MTExMTExMTExMTExMTEsMjc5NAoyMDI1LTAxLTAxLDIwMjUtMDEsRXZlbnRzLDE2Nyw5MiwwLjU1MDg5ODIwMzU5MjgxNDQsMTI3OTEKMjAyNS0wMS0wMSwyMDI1LTAxLE91dGJvdW5kLDE2NSw2NCwwLjM4Nzg3ODc4Nzg3ODc4NzksNzAwMgoyMDI1LTAyLTAxLDIwMjUtMDIsT3JnYW5pYyBTZWFyY2gsMzc1LDIyOSwwLjYxMDY2NjY2NjY2NjY2NjcsNjk4NgoyMDI1LTAyLTAxLDIwMjUtMDIsUGFpZCBBZHMsMzEyLDE1MCwwLjQ4MDc2OTIzMDc2OTIzMDgsMjAwMjEKMjAyNS0wMi0wMSwyMDI1LTAyLFJlZmVycmFsLDIxNCwxNDMsMC42NjgyMjQyOTkwNjU0MjA2LDI2NTgKMjAyNS0wMi0wMSwyMDI1LTAyLEV2ZW50cywxNjUsOTEsMC41NTE1MTUxNTE1MTUxNTE1LDEyNjM3CjIwMjUtMDItMDEsMjAyNS0wMixPdXRib3VuZCwxNzEsNjcsMC4zOTE4MTI4NjU0OTcwNzYsNzI1NgoyMDI1LTAzLTAxLDIwMjUtMDMsT3JnYW5pYyBTZWFyY2gsMzc1LDIyOSwwLjYxMDY2NjY2NjY2NjY2NjcsNjk4NgoyMDI1LTAzLTAxLDIwMjUtMDMsUGFpZCBBZHMsMzA5LDE0OCwwLjQ3ODk2NDQwMTI5NDQ5ODM1LDE5ODI5CjIwMjUtMDMtMDEsMjAyNS0wMyxSZWZlcnJhbCwyMjAsMTQ3LDAuNjY4MTgxODE4MTgxODE4MiwyNzMyCjIwMjUtMDMtMDEsMjAyNS0wMyxFdmVudHMsMTc3LDk3LDAuNTQ4MDIyNTk4ODcwMDU2NCwxMzU1NgoyMDI1LTAzLTAxLDIwMjUtMDMsT3V0Ym91bmQsMTg2LDczLDAuMzkyNDczMTE4Mjc5NTY5OSw3ODkzCjIwMjUtMDQtMDEsMjAyNS0wNCxPcmdhbmljIFNlYXJjaCwzODcsMjM2LDAuNjA5ODE5MTIxNDQ3MDI4NCw3MjEwCjIwMjUtMDQtMDEsMjAyNS0wNCxQYWlkIEFkcywzMzAsMTU4LDAuNDc4Nzg3ODc4Nzg3ODc4NzYsMjExNzYKMjAyNS0wNC0wMSwyMDI1LTA0LFJlZmVycmFsLDI0NiwxNjUsMC42NzA3MzE3MDczMTcwNzMyLDMwNTUKMjAyNS0wNC0wMSwyMDI1LTA0LEV2ZW50cywyMDEsMTExLDAuNTUyMjM4ODA1OTcwMTQ5MywxNTM5NQoyMDI1LTA0LTAxLDIwMjUtMDQsT3V0Ym91bmQsMjA0LDgwLDAuMzkyMTU2ODYyNzQ1MDk4MDMsODY1NwoyMDI1LTA1LTAxLDIwMjUtMDUsT3JnYW5pYyBTZWFyY2gsNDAwLDI0NCwwLjYxLDc0NTIKMjAyNS0wNS0wMSwyMDI1LTA1LFBhaWQgQWRzLDM1NywxNzEsMC40Nzg5OTE1OTY2Mzg2NTU1LDIyOTA5CjIwMjUtMDUtMDEsMjAyNS0wNSxSZWZlcnJhbCwyNjksMTgwLDAuNjY5MTQ0OTgxNDEyNjM5NSwzMzQxCjIwMjUtMDUtMDEsMjAyNS0wNSxFdmVudHMsMjEzLDExNywwLjU0OTI5NTc3NDY0Nzg4NzQsMTYzMTQKMjAyNS0wNS0wMSwyMDI1LTA1LE91dGJvdW5kLDIwNyw4MSwwLjM5MTMwNDM0NzgyNjA4Nyw4Nzg0CjIwMjUtMDYtMDEsMjAyNS0wNixPcmdhbmljIFNlYXJjaCwzNzksMjMxLDAuNjA5NDk4NjgwNzM4Nzg2Myw3MDYxCjIwMjUtMDYtMDEsMjAyNS0wNixQYWlkIEFkcywzNDIsMTY0LDAuNDc5NTMyMTYzNzQyNjkwMDMsMjE5NDYKMjAyNS0wNi0wMSwyMDI1LTA2LFJlZmVycmFsLDI1MCwxNjgsMC42NzIsMzEwNQoyMDI1LTA2LTAxLDIwMjUtMDYsRXZlbnRzLDE4OSwxMDQsMC41NTAyNjQ1NTAyNjQ1NTAyLDE0NDc2CjIwMjUtMDYtMDEsMjAyNS0wNixPdXRib3VuZCwxODEsNzEsMC4zOTIyNjUxOTMzNzAxNjU3NCw3NjgxCjIwMjUtMDctMDEsMjAyNS0wNyxPcmdhbmljIFNlYXJjaCwzNzIsMjI3LDAuNjEwMjE1MDUzNzYzNDQwOSw2OTMwCjIwMjUtMDctMDEsMjAyNS0wNyxQYWlkIEFkcywzMjYsMTU2LDAuNDc4NTI3NjA3MzYxOTYzMiwyMDkxOQoyMDI1LTA3LTAxLDIwMjUtMDcsUmVmZXJyYWwsMjI4LDE1MywwLjY3MTA1MjYzMTU3ODk0NzMsMjgzMgoyMDI1LTA3LTAxLDIwMjUtMDcsRXZlbnRzLDE2OSw5MywwLjU1MDI5NTg1Nzk4ODE2NTcsMTI5NDQKMjAyNS0wNy0wMSwyMDI1LTA3LE91dGJvdW5kLDE2NSw2NCwwLjM4Nzg3ODc4Nzg3ODc4NzksNzAwMgoyMDI1LTA4LTAxLDIwMjUtMDgsT3JnYW5pYyBTZWFyY2gsNDAzLDI0NiwwLjYxMDQyMTgzNjIyODI4NzgsNzUwOAoyMDI1LTA4LTAxLDIwMjUtMDgsUGFpZCBBZHMsMzM4LDE2MiwwLjQ3OTI4OTk0MDgyODQwMjM3LDIxNjg5CjIwMjUtMDgtMDEsMjAyNS0wOCxSZWZlcnJhbCwyMzIsMTU1LDAuNjY4MTAzNDQ4Mjc1ODYyMSwyODgxCjIwMjUtMDgtMDEsMjAyNS0wOCxFdmVudHMsMTc2LDk3LDAuNTUxMTM2MzYzNjM2MzYzNiwxMzQ4MAoyMDI1LTA4LTAxLDIwMjUtMDgsT3V0Ym91bmQsMTgxLDcxLDAuMzkyMjY1MTkzMzcwMTY1NzQsNzY4MQoyMDI1LTA5LTAxLDIwMjUtMDksT3JnYW5pYyBTZWFyY2gsNDIwLDI1NiwwLjYwOTUyMzgwOTUyMzgwOTYsNzgyNQoyMDI1LTA5LTAxLDIwMjUtMDksUGFpZCBBZHMsMzQ2LDE2NiwwLjQ3OTc2ODc4NjEyNzE2NzYsMjIyMDMKMjAyNS0wOS0wMSwyMDI1LTA5LFJlZmVycmFsLDI0MywxNjMsMC42NzA3ODE4OTMwMDQxMTUzLDMwMTgKMjAyNS0wOS0wMSwyMDI1LTA5LEV2ZW50cywxOTQsMTA3LDAuNTUxNTQ2MzkxNzUyNTc3NCwxNDg1OAoyMDI1LTA5LTAxLDIwMjUtMDksT3V0Ym91bmQsMjAzLDc5LDAuMzg5MTYyNTYxNTc2MzU0Nyw4NjE0CjIwMjUtMTAtMDEsMjAyNS0xMCxPcmdhbmljIFNlYXJjaCw0MDQsMjQ2LDAuNjA4OTEwODkxMDg5MTA4OSw3NTI3CjIwMjUtMTAtMDEsMjAyNS0xMCxQYWlkIEFkcywzNDAsMTYzLDAuNDc5NDExNzY0NzA1ODgyMzcsMjE4MTgKMjAyNS0xMC0wMSwyMDI1LTEwLFJlZmVycmFsLDI1MSwxNjgsMC42NjkzMjI3MDkxNjMzNDY2LDMxMTcKMjAyNS0xMC0wMSwyMDI1LTEwLEV2ZW50cywyMDUsMTEzLDAuNTUxMjE5NTEyMTk1MTIyLDE1NzAxCjIwMjUtMTAtMDEsMjAyNS0xMCxPdXRib3VuZCwyMTAsODIsMC4zOTA0NzYxOTA0NzYxOTA1LDg5MTEKMjAyNS0xMS0wMSwyMDI1LTExLE9yZ2FuaWMgU2VhcmNoLDQxNiwyNTQsMC42MTA1NzY5MjMwNzY5MjMxLDc3NTAKMjAyNS0xMS0wMSwyMDI1LTExLFBhaWQgQWRzLDM2NywxNzYsMC40Nzk1NjQwMzI2OTc1NDc2NiwyMzU1MAoyMDI1LTExLTAxLDIwMjUtMTEsUmVmZXJyYWwsMjc3LDE4NiwwLjY3MTQ4MDE0NDQwNDMzMjEsMzQ0MAoyMDI1LTExLTAxLDIwMjUtMTEsRXZlbnRzLDIyMiwxMjIsMC41NDk1NDk1NDk1NDk1NDk2LDE3MDAzCjIwMjUtMTEtMDEsMjAyNS0xMSxPdXRib3VuZCwyMTgsODUsMC4zODk5MDgyNTY4ODA3MzM5NCw5MjUxCjIwMjUtMTItMDEsMjAyNS0xMixPcmdhbmljIFNlYXJjaCw0NTgsMjc5LDAuNjA5MTcwMzA1Njc2ODU1OSw4NTMzCjIwMjUtMTItMDEsMjAyNS0xMixQYWlkIEFkcyw0MTQsMTk5LDAuNDgwNjc2MzI4NTAyNDE1NSwyNjU2NgoyMDI1LTEyLTAxLDIwMjUtMTIsUmVmZXJyYWwsMzA3LDIwNiwwLjY3MTAwOTc3MTk4Njk3MDYsMzgxMwoyMDI1LTEyLTAxLDIwMjUtMTIsRXZlbnRzLDIzNSwxMjksMC41NDg5MzYxNzAyMTI3NjYsMTc5OTkKMjAyNS0xMi0wMSwyMDI1LTEyLE91dGJvdW5kLDIyNCw4NywwLjM4ODM5Mjg1NzE0Mjg1NzE1LDk1MDUKMjAyNi0wMS0wMSwyMDI2LTAxLE9yZ2FuaWMgU2VhcmNoLDM5NSwyNDEsMC42MTAxMjY1ODIyNzg0ODEsNzYwOAoyMDI2LTAxLTAxLDIwMjYtMDEsUGFpZCBBZHMsMzUwLDE2OCwwLjQ4LDIzMjE5CjIwMjYtMDEtMDEsMjAyNi0wMSxSZWZlcnJhbCwyNDgsMTY2LDAuNjY5MzU0ODM4NzA5Njc3NCwzMTg0CjIwMjYtMDEtMDEsMjAyNi0wMSxFdmVudHMsMTg0LDEwMSwwLjU0ODkxMzA0MzQ3ODI2MDksMTQ1NjkKMjAyNi0wMS0wMSwyMDI2LTAxLE91dGJvdW5kLDE3OCw2OSwwLjM4NzY0MDQ0OTQzODIwMjI1LDc4MDkKMjAyNi0wMi0wMSwyMDI2LTAyLE9yZ2FuaWMgU2VhcmNoLDQwNywyNDgsMC42MDkzMzY2MDkzMzY2MDk0LDc4MzkKMjAyNi0wMi0wMSwyMDI2LTAyLFBhaWQgQWRzLDM0NSwxNjYsMC40ODExNTk0MjAyODk4NTUxLDIyODg3CjIwMjYtMDItMDEsMjAyNi0wMixSZWZlcnJhbCwyMzcsMTU5LDAuNjcwODg2MDc1OTQ5MzY3MSwzMDQzCjIwMjYtMDItMDEsMjAyNi0wMixFdmVudHMsMTc4LDk4LDAuNTUwNTYxNzk3NzUyODA5LDE0MDk0CjIwMjYtMDItMDEsMjAyNi0wMixPdXRib3VuZCwxODAsNzAsMC4zODg4ODg4ODg4ODg4ODg5LDc4OTcKMjAyNi0wMy0wMSwyMDI2LTAzLE9yZ2FuaWMgU2VhcmNoLDQ0MCwyNjgsMC42MDkwOTA5MDkwOTA5MDkxLDg0NzQKMjAyNi0wMy0wMSwyMDI2LTAzLFBhaWQgQWRzLDM2MiwxNzQsMC40ODA2NjI5ODM0MjU0MTQzNiwyNDAxNQoyMDI2LTAzLTAxLDIwMjYtMDMsUmVmZXJyYWwsMjUyLDE2OSwwLjY3MDYzNDkyMDYzNDkyMDYsMzIzNgoyMDI2LTAzLTAxLDIwMjYtMDMsRXZlbnRzLDE5OCwxMDksMC41NTA1MDUwNTA1MDUwNTA1LDE1Njc4CjIwMjYtMDMtMDEsMjAyNi0wMyxPdXRib3VuZCwyMDgsODEsMC4zODk0MjMwNzY5MjMwNzY5LDkxMjUKMjAyNi0wNC0wMSwyMDI2LTA0LE9yZ2FuaWMgU2VhcmNoLDQ0NSwyNzEsMC42MDg5ODg3NjQwNDQ5NDM4LDg1NzEKMjAyNi0wNC0wMSwyMDI2LTA0LFBhaWQgQWRzLDM3MSwxNzgsMC40Nzk3ODQzNjY1NzY4MTk0LDI0NjEyCjIwMjYtMDQtMDEsMjAyNi0wNCxSZWZlcnJhbCwyNzAsMTgxLDAuNjcwMzcwMzcwMzcwMzcwNCwzNDY3CjIwMjYtMDQtMDEsMjAyNi0wNCxFdmVudHMsMjIwLDEyMSwwLjU1LDE3NDIwCjIwMjYtMDQtMDEsMjAyNi0wNCxPdXRib3VuZCwyMjgsODksMC4zOTAzNTA4NzcxOTI5ODI0NSwxMDAwMgoyMDI2LTA1LTAxLDIwMjYtMDUsT3JnYW5pYyBTZWFyY2gsNDI3LDI2MCwwLjYwODg5OTI5NzQyMzg4NzYsODIyNAoyMDI2LTA1LTAxLDIwMjYtMDUsUGFpZCBBZHMsMzczLDE3OSwwLjQ3OTg5Mjc2MTM5NDEwMTg2LDI0NzQ1CjIwMjYtMDUtMDEsMjAyNi0wNSxSZWZlcnJhbCwyODEsMTg4LDAuNjY5MDM5MTQ1OTA3NDczMywzNjA4CjIwMjYtMDUtMDEsMjAyNi0wNSxFdmVudHMsMjI3LDEyNSwwLjU1MDY2MDc5Mjk1MTU0MTgsMTc5NzQKMjAyNi0wNS0wMSwyMDI2LTA1LE91dGJvdW5kLDIyNiw4OCwwLjM4OTM4MDUzMDk3MzQ1MTMsOTkxNQoyMDI2LTA2LTAxLDIwMjYtMDYsT3JnYW5pYyBTZWFyY2gsNDA4LDI0OSwwLjYxMDI5NDExNzY0NzA1ODksNzg1OAoyMDI2LTA2LTAxLDIwMjYtMDYsUGFpZCBBZHMsMzY4LDE3NywwLjQ4MDk3ODI2MDg2OTU2NTI0LDI0NDEzCjIwMjYtMDYtMDEsMjAyNi0wNixSZWZlcnJhbCwyNzUsMTg0LDAuNjY5MDkwOTA5MDkwOTA5MSwzNTMxCjIwMjYtMDYtMDEsMjAyNi0wNixFdmVudHMsMjEzLDExNywwLjU0OTI5NTc3NDY0Nzg4NzQsMTY4NjUKMjAyNi0wNi0wMSwyMDI2LTA2LE91dGJvdW5kLDIwNCw4MCwwLjM5MjE1Njg2Mjc0NTA5ODAzLDg5NDkKMjAyNi0wNy0wMSwyMDI2LTA3LE9yZ2FuaWMgU2VhcmNoLDQxOCwyNTUsMC42MTAwNDc4NDY4ODk5NTIyLDgwNTEKMjAyNi0wNy0wMSwyMDI2LTA3LFBhaWQgQWRzLDM3NCwxODAsMC40ODEyODM0MjI0NTk4OTMwMywyNDgxMQoyMDI2LTA3LTAxLDIwMjYtMDcsUmVmZXJyYWwsMjY4LDE4MCwwLjY3MTY0MTc5MTA0NDc3NjIsMzQ0MQoyMDI2LTA3LTAxLDIwMjYtMDcsRXZlbnRzLDIwMCwxMTAsMC41NSwxNTgzNgoyMDI2LTA3LTAxLDIwMjYtMDcsT3V0Ym91bmQsMTkyLDc1LDAuMzkwNjI1LDg0MjMKMjAyNi0wOC0wMSwyMDI2LTA4LE9yZ2FuaWMgU2VhcmNoLDQ0MiwyNzAsMC42MTA4NTk3Mjg1MDY3ODc0LDg1MTMKMjAyNi0wOC0wMSwyMDI2LTA4LFBhaWQgQWRzLDM4MCwxODIsMC40Nzg5NDczNjg0MjEwNTI2LDI1MjA5CjIwMjYtMDgtMDEsMjAyNi0wOCxSZWZlcnJhbCwyNjIsMTc2LDAuNjcxNzU1NzI1MTkwODM5NywzMzY0CjIwMjYtMDgtMDEsMjAyNi0wOCxFdmVudHMsMTk2LDEwOCwwLjU1MTAyMDQwODE2MzI2NTMsMTU1MTkKMjAyNi0wOC0wMSwyMDI2LTA4LE91dGJvdW5kLDE5NSw3NiwwLjM4OTc0MzU4OTc0MzU4OTc1LDg1NTUKMjAyNi0wOS0wMSwyMDI2LTA5LE9yZ2FuaWMgU2VhcmNoLDQ1OSwyODAsMC42MTAwMjE3ODY0OTIzNzQ3LDg4NDAKMjAyNi0wOS0wMSwyMDI2LTA5LFBhaWQgQWRzLDM3OSwxODIsMC40ODAyMTEwODE3OTQxOTUyNSwyNTE0MwoyMDI2LTA5LTAxLDIwMjYtMDksUmVmZXJyYWwsMjYyLDE3NiwwLjY3MTc1NTcyNTE5MDgzOTcsMzM2NAoyMDI2LTA5LTAxLDIwMjYtMDksRXZlbnRzLDIwMywxMTIsMC41NTE3MjQxMzc5MzEwMzQ1LDE2MDc0CjIwMjYtMDktMDEsMjAyNi0wOSxPdXRib3VuZCwyMTEsODIsMC4zODg2MjU1OTI0MTcwNjE2LDkyNTcKMjAyNi0xMC0wMSwyMDI2LTEwLE9yZ2FuaWMgU2VhcmNoLDQ2NiwyODQsMC42MDk0NDIwNjAwODU4MzY5LDg5NzUKMjAyNi0xMC0wMSwyMDI2LTEwLFBhaWQgQWRzLDM4NSwxODUsMC40ODA1MTk0ODA1MTk0ODA1LDI1NTQxCjIwMjYtMTAtMDEsMjAyNi0xMCxSZWZlcnJhbCwyNzYsMTg1LDAuNjcwMjg5ODU1MDcyNDYzNywzNTQ0CjIwMjYtMTAtMDEsMjAyNi0xMCxFdmVudHMsMjI0LDEyMywwLjU0OTEwNzE0Mjg1NzE0MjksMTc3MzYKMjAyNi0xMC0wMSwyMDI2LTEwLE91dGJvdW5kLDIzNCw5MSwwLjM4ODg4ODg4ODg4ODg4ODksMTAyNjYKMjAyNi0xMS0wMSwyMDI2LTExLE9yZ2FuaWMgU2VhcmNoLDQ3NywyOTEsMC42MTAwNjI4OTMwODE3NjEsOTE4NwoyMDI2LTExLTAxLDIwMjYtMTEsUGFpZCBBZHMsNDEwLDE5NywwLjQ4MDQ4NzgwNDg3ODA0ODc2LDI3MTk5CjIwMjYtMTEtMDEsMjAyNi0xMSxSZWZlcnJhbCwzMDcsMjA2LDAuNjcxMDA5NzcxOTg2OTcwNiwzOTQyCjIwMjYtMTEtMDEsMjAyNi0xMSxFdmVudHMsMjUwLDEzOCwwLjU1MiwxOTc5NQoyMDI2LTExLTAxLDIwMjYtMTEsT3V0Ym91bmQsMjUyLDk4LDAuMzg4ODg4ODg4ODg4ODg4OSwxMTA1NQoyMDI2LTEyLTAxLDIwMjYtMTIsT3JnYW5pYyBTZWFyY2gsNDg4LDI5OCwwLjYxMDY1NTczNzcwNDkxOCw5Mzk5CjIwMjYtMTItMDEsMjAyNi0xMixQYWlkIEFkcyw0MzgsMjEwLDAuNDc5NDUyMDU0Nzk0NTIwNSwyOTA1NwoyMDI2LTEyLTAxLDIwMjYtMTIsUmVmZXJyYWwsMzI5LDIyMCwwLjY2ODY5MzAwOTExODU0MSw0MjI0CjIwMjYtMTItMDEsMjAyNi0xMixFdmVudHMsMjU5LDE0MiwwLjU0ODI2MjU0ODI2MjU0ODMsMjA1MDgKMjAyNi0xMi0wMSwyMDI2LTEyLE91dGJvdW5kLDI1MCw5OCwwLjM5MiwxMDk2OAo=\", BinaryEncoding.Base64),",
+                "    Source = Csv.Document(Binary, [Delimiter=\",\", Columns=7, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"Month\", type date}, {\"Month Key\", type text}, {\"Lead Source\", type text}, {\"New Leads\", Int64.Type}, {\"Qualified Leads\", Int64.Type}, {\"Qualification Rate\", type number}, {\"Acquisition Spend\", type number}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Funnel Stages",
+        "columns": [
+          {
+            "name": "Stage",
+            "dataType": "string",
+            "lineageTag": "f4f9fca6-8d6f-4806-898c-502443dc44a9",
+            "sourceColumn": "Stage"
+          },
+          {
+            "name": "Stage Order",
+            "dataType": "int64",
+            "lineageTag": "bb0ba09b-e64f-453c-91b4-e748a78fee86",
+            "sourceColumn": "Stage Order"
+          }
+        ],
+        "lineageTag": "ede82049-39ac-4885-8c9a-9e5c4b52455f",
+        "measures": [
+          {
+            "name": "Funnel Stage Value",
+            "expression": "SWITCH(SELECTEDVALUE('Funnel Stages'[Stage]),\"New Leads\",[KPI New Leads],\"Qualified Leads\",[KPI Qualified Leads],\"Opportunities\",[KPI Opportunities],\"Won Deals\",[KPI Won Deals],BLANK())",
+            "formatString": "#,0",
+            "lineageTag": "a77cece5-c23f-467a-9c84-4a5cb18bd3f8"
+          }
+        ],
+        "partitions": [
+          {
+            "name": "Funnel Stages",
+            "mode": "import",
+            "source": {
+              "expression": [
+                "let",
+                "    Binary = Binary.FromText(\"U3RhZ2UsU3RhZ2UgT3JkZXIKTmV3IExlYWRzLDEKUXVhbGlmaWVkIExlYWRzLDIKT3Bwb3J0dW5pdGllcywzCldvbiBEZWFscyw0Cg==\", BinaryEncoding.Base64),",
+                "    Source = Csv.Document(Binary, [Delimiter=\",\", Columns=2, Encoding=65001, QuoteStyle=QuoteStyle.Csv]),",
+                "    Promoted = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),",
+                "    Typed = Table.TransformColumnTypes(Promoted, {{\"Stage\", type text}, {\"Stage Order\", Int64.Type}}, \"en-US\")",
+                "in",
+                "    Typed"
+              ],
+              "type": "m"
+            }
+          }
+        ]
+      },
+      {
+        "name": "DateTableTemplate_afa3dd25-5044-443f-89c4-25e06cf5878a",
+        "annotations": [
+          {
+            "name": "__PBI_TemplateDateTable",
+            "value": "true"
+          },
+          {
+            "name": "DefaultItem",
+            "value": "DateHierarchy"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "48eb46d0-a36b-4321-b181-b265f64e6f21",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "337e27ac-52cc-4b1d-8b4c-ca4a72c19f43",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "4005ebf7-b18a-4a65-a760-b0e2a2f711b4",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "00cbc3a1-59d3-4ddf-ae46-11c22d0d92d1",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "0c47f54c-8050-42f6-8844-d0810b053048",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "b5864bc8-8111-4a9e-bc09-bb4d7f85d55a",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "12d88f6c-1f00-45f6-9202-482a1e4bfd53",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "56f4a08b-309f-45b3-8771-95a24f70e39b",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "0e89eebb-ee6f-4d12-8690-071502b4ff8d",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "01e2b6f2-aef6-4100-9789-6e1ec86e032d",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "fe10da30-a83f-4e7c-ac4e-bac5de4009c0",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "ad8d6722-02bb-4856-b4fd-441352ac1ec7"
+          }
+        ],
+        "isHidden": true,
+        "isPrivate": true,
+        "lineageTag": "0b8c95e9-2a3a-4f30-9dd7-6775ee526601",
+        "partitions": [
+          {
+            "name": "DateTableTemplate_afa3dd25-5044-443f-89c4-25e06cf5878a",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(2015,1,1), Date(2015,1,1))",
+              "type": "calculated"
+            }
+          }
+        ]
+      },
+      {
+        "name": "LocalDateTable_99b32573-cb39-4774-abef-496ce28b6542",
+        "annotations": [
+          {
+            "name": "__PBI_LocalDateTable",
+            "value": "true"
+          }
+        ],
+        "columns": [
+          {
+            "name": "Date",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              }
+            ],
+            "dataCategory": "PaddedDateTableDates",
+            "dataType": "dateTime",
+            "formatString": "General Date",
+            "isHidden": true,
+            "isNameInferred": true,
+            "lineageTag": "859e5d4b-5cb8-4073-bcf1-3a83117b29ed",
+            "sourceColumn": "[Date]",
+            "summarizeBy": "none",
+            "type": "calculatedTableColumn"
+          },
+          {
+            "name": "Year",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Year"
+              }
+            ],
+            "dataCategory": "Years",
+            "dataType": "int64",
+            "expression": "YEAR([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "3533cb71-d329-446a-b49e-ad3dc1685e0f",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "MonthNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "MonthNumber"
+              }
+            ],
+            "dataCategory": "MonthOfYear",
+            "dataType": "int64",
+            "expression": "MONTH([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "d8efad07-1133-4d16-a172-44bc0cd3a3a1",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Month",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Month"
+              }
+            ],
+            "dataCategory": "Months",
+            "dataType": "string",
+            "expression": "FORMAT([Date], \"MMMM\")",
+            "isHidden": true,
+            "lineageTag": "f31b2a5a-7f61-4b10-8839-83b55e3ba3d7",
+            "sortByColumn": "MonthNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "QuarterNo",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "QuarterNumber"
+              }
+            ],
+            "dataCategory": "QuarterOfYear",
+            "dataType": "int64",
+            "expression": "INT(([MonthNo] + 2) / 3)",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "2bffb5c9-561b-4cbe-9649-7b428a73d7b0",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Quarter",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Quarter"
+              }
+            ],
+            "dataCategory": "Quarters",
+            "dataType": "string",
+            "expression": "\"Qtr \" & [QuarterNo]",
+            "isHidden": true,
+            "lineageTag": "50bb421d-5aee-47c6-b9d6-eadac516fc90",
+            "sortByColumn": "QuarterNo",
+            "summarizeBy": "none",
+            "type": "calculated"
+          },
+          {
+            "name": "Day",
+            "annotations": [
+              {
+                "name": "SummarizationSetBy",
+                "value": "User"
+              },
+              {
+                "name": "TemplateId",
+                "value": "Day"
+              }
+            ],
+            "dataCategory": "DayOfMonth",
+            "dataType": "int64",
+            "expression": "DAY([Date])",
+            "formatString": "0",
+            "isHidden": true,
+            "lineageTag": "50338ada-7f19-45d5-a591-1140006530a2",
+            "summarizeBy": "none",
+            "type": "calculated"
+          }
+        ],
+        "hierarchies": [
+          {
+            "name": "Date Hierarchy",
+            "annotations": [
+              {
+                "name": "TemplateId",
+                "value": "DateHierarchy"
+              }
+            ],
+            "levels": [
+              {
+                "name": "Year",
+                "column": "Year",
+                "lineageTag": "0338bde9-5446-49f7-8ac8-e4d2f8b458e2",
+                "ordinal": 0
+              },
+              {
+                "name": "Quarter",
+                "column": "Quarter",
+                "lineageTag": "b9c38f5c-880e-48da-9d78-30df4dc63f9e",
+                "ordinal": 1
+              },
+              {
+                "name": "Month",
+                "column": "Month",
+                "lineageTag": "69e009b0-ffa9-4280-a4a6-a47e14337350",
+                "ordinal": 2
+              },
+              {
+                "name": "Day",
+                "column": "Day",
+                "lineageTag": "bac638a0-aad8-45a0-a4fc-df8e0c202620",
+                "ordinal": 3
+              }
+            ],
+            "lineageTag": "f098e9ce-3a20-4ffb-b1e5-6f0cb9ad8c1d"
+          }
+        ],
+        "isHidden": true,
+        "lineageTag": "c943aa29-405a-425e-94d8-78e1a536c1c0",
+        "partitions": [
+          {
+            "name": "LocalDateTable_99b32573-cb39-4774-abef-496ce28b6542",
+            "mode": "import",
+            "source": {
+              "expression": "Calendar(Date(Year(MIN('Calendar'[Date])), 1, 1), Date(Year(MAX('Calendar'[Date])), 12, 31))",
+              "type": "calculated"
+            }
+          }
+        ],
+        "showAsVariationsOnly": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "name": "CRMModernDark-7f3c2a91.json",
+  "dataColors": [
+    "#24C7D9",
+    "#39D98A",
+    "#4F7CFF",
+    "#FFB547",
+    "#FF667A",
+    "#A78BFA"
+  ],
+  "background": "#07111F",
+  "foreground": "#EAF2FF",
+  "tableAccent": "#24C7D9",
+  "textClasses": {
+    "callout": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 24,
+      "color": "#EAF2FF"
+    },
+    "title": {
+      "fontFace": "Segoe UI Semibold",
+      "fontSize": 12,
+      "color": "#EAF2FF"
+    },
+    "label": {
+      "fontFace": "Segoe UI",
+      "fontSize": 10,
+      "color": "#8EA3BA"
+    }
+  }
+}

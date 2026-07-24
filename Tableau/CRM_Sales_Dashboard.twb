@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<workbook original-version='18.1' source-build='2026.1' source-platform='win' version='18.1' xml:base='https://localhost:8080'>
+ <preferences><preference name='ui.encoding.shelf.height' value='24'/></preferences>
+ <datasources>
+  <datasource caption='CRM Monthly' inline='true' name='federated.crmmonthly' version='18.1'>
+   <connection class='textscan' directory='.' filename='crm_monthly.csv' password='' server='' />
+   <aliases enabled='yes'/>
+   <column datatype='date' name='[Month]' role='dimension' type='ordinal'/>
+   <column datatype='string' name='[Month Key]' role='dimension' type='nominal'/>
+   <column datatype='integer' name='[New Leads]' role='measure' type='quantitative'/>
+   <column datatype='integer' name='[Lead Target]' role='measure' type='quantitative'/>
+   <column datatype='integer' name='[Qualified Leads]' role='measure' type='quantitative'/>
+   <column datatype='integer' name='[Opportunities]' role='measure' type='quantitative'/>
+   <column datatype='integer' name='[Won Deals]' role='measure' type='quantitative'/>
+   <column datatype='real' name='[Won Revenue]' role='measure' type='quantitative'/>
+   <column datatype='real' name='[Revenue Target]' role='measure' type='quantitative'/>
+   <column datatype='real' name='[Pipeline Value]' role='measure' type='quantitative'/>
+   <column caption='Win Rate Calc' datatype='real' name='[Calculation_WinRate]' role='measure' type='quantitative'><calculation class='tableau' formula='SUM([Won Deals]) / SUM([Opportunities])'/></column>
+   <column caption='Target Attainment Calc' datatype='real' name='[Calculation_Attainment]' role='measure' type='quantitative'><calculation class='tableau' formula='SUM([Won Revenue]) / SUM([Revenue Target])'/></column>
+   <column caption='New Leads PY' datatype='integer' name='[Calculation_LeadsPY]' role='measure' type='quantitative'><calculation class='tableau' formula='LOOKUP(SUM([New Leads]),-12)'/></column>
+   <column caption='Won Revenue PY' datatype='real' name='[Calculation_RevenuePY]' role='measure' type='quantitative'><calculation class='tableau' formula='LOOKUP(SUM([Won Revenue]),-12)'/></column>
+  </datasource>
+ </datasources>
+ <worksheets>
+  <worksheet name='Monthly KPI Table'><table><view><datasources><datasource caption='CRM Monthly' name='federated.crmmonthly'/></datasources><slices><column>[federated.crmmonthly].[Month Key]</column></slices><rows>[federated.crmmonthly].[Month]</rows><cols>Measure Values</cols></view></table></worksheet>
+ </worksheets>
+ <dashboards><dashboard enable-sort-zone-taborder='true' name='CRM Sales Dashboard'><style/><zones><zone h='100000' id='1' type-v2='layout-basic' w='100000' x='0' y='0'/></zones></dashboard></dashboards>
+ <windows><window class='dashboard' name='CRM Sales Dashboard'><viewpoints/></window></windows>
+</workbook>

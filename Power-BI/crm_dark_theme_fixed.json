@@ -1,0 +1,14 @@
+{
+  "name": "Modern Dark CRM",
+  "dataColors": [
+    "#24C7D9",
+    "#39D98A",
+    "#4F7CFF",
+    "#FFB547",
+    "#FF667A",
+    "#A78BFA"
+  ],
+  "background": "#07111F",
+  "foreground": "#EAF2FF",
+  "tableAccent": "#24C7D9"
+}
