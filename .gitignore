@@ -1,0 +1,12 @@
+# Power BI local settings and cache
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Technical inspection files
+*.inspect.ndjson
+excel_inspect.txt
+formula_errors.txt
+
+# Windows and macOS system files
+Thumbs.db
+.DS_Store
