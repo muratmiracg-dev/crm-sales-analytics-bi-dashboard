@@ -439,17 +439,6 @@ The `Reports` folder contains a professional 20-page executive report.
 The PDF uses a 16:9 layout and vector-based charts and text. Its pages
 were validated at 1920 x 1080 resolution and remain sharp when zoomed.
 
-## Project Downloads
-
-- [Power BI PBIP Project](Power-BI/CRM_Sales_Analytics_PBIP/)
-- [DAX Measures](Power-BI/CRM_Measures.dax)
-- [Power BI Dark Theme](Power-BI/crm_dark_theme.json)
-- [Tableau Workbook](Tableau/CRM_Sales_Dashboard.twb)
-- [Excel KPI Dashboard](Excel/CRM_Sales_KPI_Dashboard.xlsx)
-- [Turkish Executive Presentation](Presentation/CRM_Satis_Analitigi_Profesyonel_Sunum_TR.pptx)
-- [English Executive Presentation](Presentation/CRM_Sales_Analytics_Professional_Deck_EN.pptx)
-- [20-Page Vector HD Executive PDF](Reports/CRM_Sales_Analytics_20_Page_HD_Professional.pdf)
-
 ## Live Dashboard Status
 
 - Power BI Service: Not publicly deployed
