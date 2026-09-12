@@ -121,6 +121,18 @@ representative and lead source tables.
 The Calendar table is maintained within the Power BI semantic model and
 does not require a separate CSV file.
 
+## Automated Data Quality
+
+The dependency-free validator protects the Power BI and Tableau inputs from silent data drift. It
+checks schemas, unique business keys, continuous monthly coverage, finite non-negative measures,
+bounded and recalculated rates, monotonic funnel stages, and byte-identical Tableau dataset copies.
+Pull requests run the validator and its regression tests on Python 3.11 and 3.12.
+
+```bash
+python scripts/validate_data.py
+python -m unittest discover -s tests -v
+```
+
 ## Power BI Data Model
 
 The Power BI semantic model uses a central Calendar table connected to
