@@ -478,3 +478,7 @@ See the [LICENSE](LICENSE) file for additional information.
 
 Business Intelligence | Data Analytics | Power BI | Tableau |
 Microsoft Excel
+
+### Input validation contract
+
+CRM CSV validation rejects duplicate column headers and rows with too many or too few fields. Malformed datasets produce a clear validation diagnostic rather than an unhandled exception or silently overwritten column.
