@@ -39,6 +39,25 @@ class DataContractTests(unittest.TestCase):
 
             self.assertTrue(any("Win Rate does not match" in error for error in errors))
 
+    def test_malformed_csv_returns_diagnostics(self) -> None:
+        for mutation in ("missing", "extra", "duplicate_header"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                self._copy_datasets(root)
+                path = root / "data" / "crm_monthly.csv"
+                with path.open(encoding="utf-8", newline="") as stream:
+                    rows = list(csv.reader(stream))
+                if mutation == "missing":
+                    rows[1].pop()
+                elif mutation == "extra":
+                    rows[1].append("unexpected")
+                else:
+                    rows[0][1] = rows[0][0]
+                with path.open("w", encoding="utf-8", newline="") as stream:
+                    csv.writer(stream).writerows(rows)
+                errors = validate_repository(root)
+                self.assertTrue(any("malformed CSV" in error for error in errors))
+
     def test_drifted_tableau_copy_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

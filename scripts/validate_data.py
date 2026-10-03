@@ -68,7 +68,14 @@ CONTRACTS = {
 def _load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
-        return reader.fieldnames or [], list(reader)
+        headers = reader.fieldnames or []
+        if len(headers) != len(set(headers)):
+            raise ValueError("duplicate column headers")
+        rows = list(reader)
+        for line_number, row in enumerate(rows, start=2):
+            if None in row or any(value is None for value in row.values()):
+                raise ValueError(f"row {line_number} has a different field count than the header")
+        return headers, rows
 
 
 def _ratio_matches(numerator: float, denominator: float, reported: float) -> bool:
@@ -91,7 +98,11 @@ def validate_repository(root: Path = ROOT) -> list[str]:
             errors.append(f"{filename}: file is missing")
             continue
 
-        headers, rows = _load_csv(path)
+        try:
+            headers, rows = _load_csv(path)
+        except (ValueError, csv.Error) as exc:
+            errors.append(f"{filename}: malformed CSV: {exc}")
+            continue
         required = {"Month", "Month Key", *contract["key"], *contract["numeric"]}
         missing = sorted(required.difference(headers))
         if missing:
