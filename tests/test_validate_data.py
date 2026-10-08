@@ -40,7 +40,7 @@ class DataContractTests(unittest.TestCase):
             self.assertTrue(any("Win Rate does not match" in error for error in errors))
 
     def test_malformed_csv_returns_diagnostics(self) -> None:
-        for mutation in ("missing", "extra", "duplicate_header"):
+        for mutation in ("missing", "extra", "duplicate_header", "blank_header", "padded_header"):
             with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as directory:
                 root = Path(directory)
                 self._copy_datasets(root)
@@ -51,8 +51,12 @@ class DataContractTests(unittest.TestCase):
                     rows[1].pop()
                 elif mutation == "extra":
                     rows[1].append("unexpected")
-                else:
+                elif mutation == "duplicate_header":
                     rows[0][1] = rows[0][0]
+                elif mutation == "blank_header":
+                    rows[0][1] = ""
+                else:
+                    rows[0][1] = f" {rows[0][1]}"
                 with path.open("w", encoding="utf-8", newline="") as stream:
                     csv.writer(stream).writerows(rows)
                 errors = validate_repository(root)

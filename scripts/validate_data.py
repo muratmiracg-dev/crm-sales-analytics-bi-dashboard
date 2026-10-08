@@ -69,6 +69,8 @@ def _load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
         headers = reader.fieldnames or []
+        if any(not header or header != header.strip() for header in headers):
+            raise ValueError("column headers must be non-empty and trimmed")
         if len(headers) != len(set(headers)):
             raise ValueError("duplicate column headers")
         rows = list(reader)
