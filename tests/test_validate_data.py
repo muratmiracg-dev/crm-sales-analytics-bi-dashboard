@@ -79,5 +79,24 @@ class DataContractTests(unittest.TestCase):
             )
 
 
+    def test_invalid_month_key_returns_diagnostic_without_crashing(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            path = root / "data" / "crm_monthly.csv"
+            with path.open(encoding="utf-8", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+                fieldnames = list(rows[0])
+            rows[0]["Month Key"] = "not-a-month"
+            with path.open("w", encoding="utf-8", newline="") as stream:
+                writer = csv.DictWriter(stream, fieldnames=fieldnames)
+                writer.writeheader()
+                writer.writerows(rows)
+
+            errors = validate_repository(root)
+
+            self.assertIn("crm_monthly.csv: invalid Month Key 'not-a-month'", errors)
+
+
 if __name__ == "__main__":
     unittest.main()
