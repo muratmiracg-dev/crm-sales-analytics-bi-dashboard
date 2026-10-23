@@ -5,6 +5,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import math
+import re
 import sys
 from datetime import date
 from pathlib import Path
@@ -88,6 +89,10 @@ def _ratio_matches(numerator: float, denominator: float, reported: float) -> boo
 def _next_month(value: str) -> str:
     year, month = map(int, value.split("-"))
     return f"{year + (month == 12):04d}-{month % 12 + 1:02d}"
+
+
+def _is_month_key(value: str) -> bool:
+    return re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", value) is not None
 
 
 def validate_repository(root: Path = ROOT) -> list[str]:
@@ -195,9 +200,13 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         month_keys = sorted(row["Month Key"] for row in monthly)
         if len(month_keys) != 36:
             errors.append("crm_monthly.csv: expected exactly 36 monthly rows")
-        for previous, current in zip(month_keys, month_keys[1:], strict=False):
-            if current != _next_month(previous):
-                errors.append(f"crm_monthly.csv: missing month between {previous} and {current}")
+        invalid_month_keys = [key for key in month_keys if not _is_month_key(key)]
+        for key in invalid_month_keys:
+            errors.append(f"crm_monthly.csv: invalid Month Key {key!r}")
+        if not invalid_month_keys:
+            for previous, current in zip(month_keys, month_keys[1:], strict=False):
+                if current != _next_month(previous):
+                    errors.append(f"crm_monthly.csv: missing month between {previous} and {current}")
 
         expected_months = set(month_keys)
         for filename in ("crm_rep_performance.csv", "crm_lead_sources.csv"):
