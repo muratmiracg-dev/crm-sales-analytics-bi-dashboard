@@ -126,7 +126,19 @@ does not require a separate CSV file.
 The dependency-free validator protects the Power BI and Tableau inputs from silent data drift. It
 checks schemas, unique business keys, continuous monthly coverage, finite non-negative measures,
 bounded and recalculated rates, monotonic funnel stages, and byte-identical Tableau dataset copies.
+It also checks that lead-source and sales-rep breakdowns of **New Leads** and **Revenue Target**
+sum back to the monthly totals (within 2%, 1% and 0.5% respectively), and prints a reconciliation
+report for every breakdown measure.
 Pull requests run the validator and its regression tests on Python 3.11 and 3.12.
+
+### Known limitations
+
+The breakdown tables do not fully reconcile with `crm_monthly.csv` for funnel outcomes. The
+largest monthly gaps are about 9% for lead-source *Qualified Leads*, and 13–16% for sales-rep
+*Opportunities*, *Won Deals* and *Won Revenue*. Over 36 months, sales-rep *Won Revenue* sums
+to about 4% more than the monthly total. KPI cards built on `crm_monthly.csv` and the rep or
+source breakdown visuals should therefore not be added together or compared as exact shares.
+Run `python scripts/validate_data.py` to see the current figures.
 
 ```bash
 python scripts/validate_data.py
