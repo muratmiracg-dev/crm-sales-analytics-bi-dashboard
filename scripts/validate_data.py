@@ -66,6 +66,23 @@ CONTRACTS = {
 }
 
 
+# Breakdown tables are allocations of the monthly totals. Measures listed in RECONCILED must
+# sum back to crm_monthly.csv within the stated relative tolerance in every month; this guards
+# KPI cards and breakdown visuals against drifting apart. Measures in UNRECONCILED were
+# generated independently and are reported, not enforced (see README "Known limitations").
+RECONCILED = (
+    ("crm_lead_sources.csv", "New Leads", 0.02),
+    ("crm_rep_performance.csv", "New Leads", 0.01),
+    ("crm_rep_performance.csv", "Revenue Target", 0.005),
+)
+UNRECONCILED = (
+    ("crm_lead_sources.csv", "Qualified Leads"),
+    ("crm_rep_performance.csv", "Opportunities"),
+    ("crm_rep_performance.csv", "Won Deals"),
+    ("crm_rep_performance.csv", "Won Revenue"),
+)
+
+
 def _load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
@@ -93,6 +110,42 @@ def _next_month(value: str) -> str:
 
 def _is_month_key(value: str) -> bool:
     return re.fullmatch(r"\d{4}-(0[1-9]|1[0-2])", value) is not None
+
+
+def _monthly_deviations(
+    monthly: list[dict[str, str]], breakdown: list[dict[str, str]], column: str
+) -> dict[str, float]:
+    """Relative difference between the breakdown sum and the monthly total, per month."""
+    sums: dict[str, float] = {}
+    for row in breakdown:
+        sums[row["Month Key"]] = sums.get(row["Month Key"], 0.0) + float(row[column])
+    deviations = {}
+    for row in monthly:
+        total = float(row[column])
+        if total:
+            deviations[row["Month Key"]] = sums.get(row["Month Key"], 0.0) / total - 1
+    return deviations
+
+
+def reconciliation_report(root: Path = ROOT) -> list[dict[str, object]]:
+    """Summarize how each breakdown measure reconciles to the monthly totals."""
+    datasets = {name: _load_csv(root / "data" / name)[1] for name in CONTRACTS}
+    monthly = datasets["crm_monthly.csv"]
+    report = []
+    tolerances = {(name, column): tol for name, column, tol in RECONCILED}
+    for name, column in [*tolerances, *UNRECONCILED]:
+        deviations = _monthly_deviations(monthly, datasets[name], column)
+        worst_month = max(deviations, key=lambda key: abs(deviations[key]))
+        report.append(
+            {
+                "dataset": name,
+                "measure": column,
+                "enforced_tolerance": tolerances.get((name, column)),
+                "max_abs_deviation": abs(deviations[worst_month]),
+                "worst_month": worst_month,
+            }
+        )
+    return report
 
 
 def validate_repository(root: Path = ROOT) -> list[str]:
@@ -215,6 +268,16 @@ def validate_repository(root: Path = ROOT) -> list[str]:
                 if actual_months != expected_months:
                     errors.append(f"{filename}: month coverage differs from crm_monthly.csv")
 
+        if not errors:
+            for filename, column, tolerance in RECONCILED:
+                deviations = _monthly_deviations(monthly, datasets[filename], column)
+                for month_key, deviation in sorted(deviations.items()):
+                    if abs(deviation) > tolerance:
+                        errors.append(
+                            f"{filename}: {column} for {month_key} differs from crm_monthly.csv "
+                            f"by {deviation:+.1%} (tolerance {tolerance:.1%})"
+                        )
+
     for filename in CONTRACTS:
         canonical = root / "data" / filename
         tableau = root / "Tableau" / filename
@@ -237,6 +300,14 @@ def main() -> int:
             print(f"- {error}", file=sys.stderr)
         return 1
     print("CRM data validation passed: 3 datasets, 396 rows, 36 months.")
+    print("Breakdown reconciliation to monthly totals (max monthly deviation):")
+    for item in reconciliation_report():
+        tolerance = item["enforced_tolerance"]
+        status = f"enforced <= {tolerance:.1%}" if tolerance is not None else "not reconciled"
+        print(
+            f"- {item['dataset']} {item['measure']}: {item['max_abs_deviation']:.1%} "
+            f"({item['worst_month']}; {status})"
+        )
     return 0
 
 

@@ -10,7 +10,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from scripts.validate_data import validate_repository  # noqa: E402
+from scripts.validate_data import (  # noqa: E402
+    RECONCILED,
+    UNRECONCILED,
+    reconciliation_report,
+    validate_repository,
+)
 
 
 class DataContractTests(unittest.TestCase):
@@ -96,6 +101,45 @@ class DataContractTests(unittest.TestCase):
             errors = validate_repository(root)
 
             self.assertIn("crm_monthly.csv: invalid Month Key 'not-a-month'", errors)
+
+
+    def test_breakdown_drift_beyond_tolerance_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            for folder in ("data", "Tableau"):
+                path = root / folder / "crm_lead_sources.csv"
+                with path.open(encoding="utf-8", newline="") as stream:
+                    rows = list(csv.DictReader(stream))
+                    fieldnames = list(rows[0])
+                # Move 10% of January 2024 leads out of one source without updating totals.
+                row = rows[0]
+                new_leads = int(row["New Leads"]) - 110
+                row["New Leads"] = str(new_leads)
+                row["Qualification Rate"] = repr(int(row["Qualified Leads"]) / new_leads)
+                with path.open("w", encoding="utf-8", newline="") as stream:
+                    writer = csv.DictWriter(stream, fieldnames=fieldnames, lineterminator="\n")
+                    writer.writeheader()
+                    writer.writerows(rows)
+
+            errors = validate_repository(root)
+
+            self.assertTrue(
+                any(
+                    "crm_lead_sources.csv: New Leads for 2024-01 differs" in error
+                    for error in errors
+                ),
+                errors,
+            )
+
+    def test_reconciliation_report_covers_every_breakdown_measure(self) -> None:
+        report = reconciliation_report(ROOT)
+        measures = {(item["dataset"], item["measure"]) for item in report}
+        expected = {(name, column) for name, column, _ in RECONCILED} | set(UNRECONCILED)
+        self.assertEqual(measures, expected)
+        for item in report:
+            if item["enforced_tolerance"] is not None:
+                self.assertLessEqual(item["max_abs_deviation"], item["enforced_tolerance"])
 
 
 if __name__ == "__main__":
