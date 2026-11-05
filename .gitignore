@@ -10,3 +10,7 @@ formula_errors.txt
 # Windows and macOS system files
 Thumbs.db
 .DS_Store
+
+# Python bytecode
+__pycache__/
+*.py[cod]
