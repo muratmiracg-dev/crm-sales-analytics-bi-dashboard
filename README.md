@@ -123,9 +123,12 @@ does not require a separate CSV file.
 
 ## Automated Data Quality
 
-The dependency-free validator protects the Power BI and Tableau inputs from silent data drift. It
-checks schemas, unique business keys, continuous monthly coverage, finite non-negative measures,
-bounded and recalculated rates, monotonic funnel stages, and byte-identical Tableau dataset copies.
+The dependency-free validator protects the Power BI, Tableau and Excel inputs from silent data
+drift. It checks schemas, unique business keys, continuous monthly coverage, finite non-negative
+measures, bounded and recalculated rates, monotonic funnel stages, and that every BI copy of the
+datasets still matches `data/`: the byte-identical Tableau CSVs, the CSVs embedded (base64) in the
+Power BI semantic model's Power Query partitions, the Power BI Calendar's month coverage, and the
+data sheets of the Excel workbook. When the CSVs change, refresh all three tools in the same commit.
 It also checks that lead-source and sales-rep breakdowns of **New Leads** and **Revenue Target**
 sum back to the monthly totals (within 2%, 1% and 0.5% respectively), and prints a reconciliation
 report for every breakdown measure.
@@ -390,10 +393,10 @@ crm-sales-analytics-bi-dashboard/
 │   ├── crm_rep_performance.csv
 │   └── crm_lead_sources.csv
 │
-├── Excel/
+├── excel/
 │   └── CRM_Sales_KPI_Dashboard.xlsx
 │
-├── Data/
+├── data/
 │   ├── crm_monthly.csv
 │   ├── crm_rep_performance.csv
 │   └── crm_lead_sources.csv
@@ -443,7 +446,7 @@ the `.pbip` file may prevent the report from opening correctly.
 
 ### Microsoft Excel
 
-1. Open the `Excel` folder.
+1. Open the `excel` folder.
 2. Open `CRM_Sales_KPI_Dashboard.xlsx`.
 3. If Excel opens the workbook in Protected View, select
    `Enable Editing`.
