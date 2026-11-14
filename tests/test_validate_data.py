@@ -15,6 +15,7 @@ sys.path.insert(0, str(ROOT))
 
 from scripts.validate_data import (  # noqa: E402
     EXCEL_WORKBOOK,
+    MEASURES_FILE,
     POWER_BI_MODEL,
     RECONCILED,
     UNRECONCILED,
@@ -243,6 +244,36 @@ class DataContractTests(unittest.TestCase):
                 ),
                 errors,
             )
+
+    def test_pipeline_measures_use_latest_month_snapshot(self) -> None:
+        # Pipeline Value is a month-end balance: the sum over 2026 is about 11x the
+        # December balance, so an additive measure overstates any multi-month view.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            (root / MEASURES_FILE).write_text(
+                (ROOT / MEASURES_FILE).read_text(encoding="utf-8"), encoding="utf-8"
+            )
+            self.assertEqual(validate_repository(root), [])
+
+    def test_additive_pipeline_measure_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            path = root / POWER_BI_MODEL
+            model = json.loads(path.read_text(encoding="utf-8"))
+            for table in model["model"]["tables"]:
+                for measure in table.get("measures", []):
+                    if measure["name"] == "KPI Pipeline Value":
+                        measure["expression"] = "SUM(crm_monthly[Pipeline Value])"
+            path.write_text(json.dumps(model, indent=2, ensure_ascii=False), encoding="utf-8")
+            (root / MEASURES_FILE).write_text(
+                "Pipeline Value = SUM( crm_monthly[Pipeline Value] )\n", encoding="utf-8"
+            )
+            errors = validate_repository(root)
+        self.assertEqual(len(errors), 2, errors)
+        self.assertIn("'KPI Pipeline Value' aggregates snapshot column", errors[0])
+        self.assertIn("CRM_Measures.dax: measure 'Pipeline Value'", errors[1])
 
     def test_reconciliation_report_covers_every_breakdown_measure(self) -> None:
         report = reconciliation_report(ROOT)

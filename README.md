@@ -132,7 +132,9 @@ data sheets of the Excel workbook. When the CSVs change, refresh all three tools
 It also checks that lead-source and sales-rep breakdowns of **New Leads** and **Revenue Target**
 sum back to the monthly totals (within 2%, 1% and 0.5% respectively), and prints a reconciliation
 report for every breakdown measure.
-Pull requests run the validator and its regression tests on Python 3.11 and 3.12.
+Finally, it rejects any Power BI or reference DAX measure that adds up the month-end
+**Pipeline Value** snapshot across months (see *Pipeline Value is a snapshot* below).
+Pull requests run the validator and its regression tests on Python 3.11, 3.12 and 3.13.
 
 ### Known limitations
 
@@ -147,6 +149,16 @@ Run `python scripts/validate_data.py` to see the current figures.
 python scripts/validate_data.py
 python -m unittest discover -s tests -v
 ```
+
+### Pipeline Value is a snapshot
+
+`Pipeline Value` is the open pipeline at month end, a balance rather than a monthly flow.
+`KPI Pipeline Value` (and `KPI Pipeline Target`, 3x the revenue target) therefore report the
+**latest month in the current filter context**, not a sum over months. Until November 2026 the
+measure used `SUM`, so a card with no month selected, a year or a quarter added up every
+month-end balance: TL 241.7M for 2026 and TL 615.1M for all 36 months, against a December 2026
+pipeline of TL 21.84M. Month-level visuals were unaffected. The PDF report and the PowerPoint
+decks are static exports and were not regenerated with the corrected measure.
 
 ## Power BI Data Model
 

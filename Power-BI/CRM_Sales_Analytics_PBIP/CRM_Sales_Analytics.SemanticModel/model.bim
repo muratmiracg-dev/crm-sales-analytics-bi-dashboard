@@ -303,7 +303,7 @@
           },
           {
             "name": "KPI Pipeline Value",
-            "expression": "SUM(crm_monthly[Pipeline Value])",
+            "expression": "VAR LastMonth = MAX(crm_monthly[Month]) RETURN CALCULATE(SUM(crm_monthly[Pipeline Value]), crm_monthly[Month] = LastMonth)",
             "formatString": "₺#,0",
             "lineageTag": "55d4d71f-f4a1-4d07-a8b7-262edf3cf680"
           },
@@ -399,7 +399,7 @@
           },
           {
             "name": "KPI Pipeline Target",
-            "expression": "[KPI Revenue Target]*3",
+            "expression": "VAR LastMonth = MAX(crm_monthly[Month]) RETURN 3 * CALCULATE(SUM(crm_monthly[Revenue Target]), crm_monthly[Month] = LastMonth)",
             "formatString": "₺#,0",
             "lineageTag": "a784c60f-a675-4893-b462-5732b23319e6"
           }

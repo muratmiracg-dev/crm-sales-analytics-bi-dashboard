@@ -10,7 +10,10 @@ Opportunities = SUM(crm_monthly[Opportunities])
 Won Deals = SUM(crm_monthly[Won Deals])
 Won Revenue = SUM(crm_monthly[Won Revenue])
 Revenue Target = SUM(crm_monthly[Revenue Target])
-Pipeline Value = SUM(crm_monthly[Pipeline Value])
+// Pipeline Value is a month-end snapshot (a stock), not a flow: summing it across months
+// counts the same open deals repeatedly. Report the latest month in the current filter context.
+Pipeline Value = VAR LastMonth = MAX(crm_monthly[Month]) RETURN CALCULATE(SUM(crm_monthly[Pipeline Value]), crm_monthly[Month] = LastMonth)
+Pipeline Target = VAR LastMonth = MAX(crm_monthly[Month]) RETURN 3 * CALCULATE(SUM(crm_monthly[Revenue Target]), crm_monthly[Month] = LastMonth)
 Average Deal Size = DIVIDE([Won Revenue],[Won Deals])
 Lead Qualification Rate = DIVIDE([Qualified Leads],[New Leads])
 Opportunity Conversion = DIVIDE([Opportunities],[Qualified Leads])
