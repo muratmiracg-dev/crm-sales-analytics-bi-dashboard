@@ -134,7 +134,8 @@ sum back to the monthly totals (within 2%, 1% and 0.5% respectively), and prints
 report for every breakdown measure.
 Finally, it rejects any Power BI or reference DAX measure that adds up the month-end
 **Pipeline Value** snapshot across months (see *Pipeline Value is a snapshot* below).
-Pull requests run the validator and its regression tests on Python 3.11, 3.12 and 3.13.
+Pull requests run the validator and its regression tests on Python 3.11, 3.12 and 3.13,
+and CodeQL (security-extended queries) scans the Python code and the workflow files.
 
 ### Known limitations
 
