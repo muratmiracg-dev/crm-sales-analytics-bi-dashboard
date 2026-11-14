@@ -334,6 +334,51 @@ def reconciliation_report(root: Path = ROOT) -> list[dict[str, object]]:
     return report
 
 
+# Columns that hold month-end balances (stocks), not flows. Adding them across months counts
+# the same open deals once per month, so a measure over a quarter, a year or an unfiltered page
+# would report a pipeline many times its real size. Measures must pick the latest month in the
+# filter context instead of aggregating every month.
+SNAPSHOT_COLUMNS = ("crm_monthly[Pipeline Value]",)
+MEASURES_FILE = Path("Power-BI/CRM_Measures.dax")
+_LATEST_PERIOD = re.compile(
+    r"MAX\(\s*crm_monthly\[Month\]\s*\)|LASTDATE\(|LASTNONBLANK(?:VALUE)?\(|ENDOFMONTH\(",
+    re.IGNORECASE,
+)
+
+
+def _snapshot_measure_errors(root: Path) -> list[str]:
+    """Reject measures that aggregate a month-end snapshot column across months."""
+    measures: list[tuple[str, str, str]] = []
+    model_path = root / POWER_BI_MODEL
+    if model_path.is_file():
+        try:
+            model = json.loads(model_path.read_text(encoding="utf-8"))
+            for table in model["model"]["tables"]:
+                for measure in table.get("measures", []):
+                    expression = measure.get("expression", "")
+                    if isinstance(expression, list):
+                        expression = "\n".join(expression)
+                    measures.append((POWER_BI_MODEL.as_posix(), measure["name"], expression))
+        except (KeyError, TypeError, ValueError) as exc:
+            return [f"{POWER_BI_MODEL.as_posix()}: cannot read measures ({exc})"]
+    dax_path = root / MEASURES_FILE
+    if dax_path.is_file():
+        for line in dax_path.read_text(encoding="utf-8").splitlines():
+            name, sep, expression = line.partition("=")
+            if sep and not line.lstrip().startswith("//"):
+                measures.append((MEASURES_FILE.as_posix(), name.strip(), expression))
+    errors = []
+    for source, name, expression in measures:
+        compact = re.sub(r"\s+", "", expression)
+        for column in SNAPSHOT_COLUMNS:
+            if re.sub(r"\s+", "", column) in compact and not _LATEST_PERIOD.search(expression):
+                errors.append(
+                    f"{source}: measure '{name}' aggregates snapshot column {column} "
+                    "across months; select the latest month in context instead"
+                )
+    return errors
+
+
 def validate_repository(root: Path = ROOT) -> list[str]:
     errors: list[str] = []
     datasets: dict[str, list[dict[str, str]]] = {}
@@ -481,6 +526,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
         if (root / "data" / filename).is_file()
     }
     errors.extend(_bi_copy_errors(root, canonical_text))
+    errors.extend(_snapshot_measure_errors(root))
     return errors
 
 
