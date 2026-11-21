@@ -183,6 +183,82 @@ class DataContractTests(unittest.TestCase):
                 "Excel sheet 'Monthly Data': row 2 differs from data/crm_monthly.csv", errors
             )
 
+    def _rewrite_dashboard(self, root: Path, *replacements: tuple[str, str]) -> None:
+        from scripts.validate_data import _xlsx_sheet_member  # noqa: PLC0415
+
+        path = root / EXCEL_WORKBOOK
+        with zipfile.ZipFile(path) as archive:
+            member = _xlsx_sheet_member(archive, "Dashboard")
+            contents = {name: archive.read(name) for name in archive.namelist()}
+        sheet = contents[member].decode("utf-8")
+        for old, new in replacements:
+            self.assertEqual(sheet.count(old), 1, old)
+            sheet = sheet.replace(old, new)
+        contents[member] = sheet.encode("utf-8")
+        with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as archive:
+            for name, data in contents.items():
+                archive.writestr(name, data)
+
+    def test_excel_prior_year_captions_match_same_month_last_year(self) -> None:
+        from scripts.validate_data import (  # noqa: PLC0415
+            PRIOR_YEAR_CAPTIONS,
+            _xlsx_sheet_cells,
+        )
+
+        cells = _xlsx_sheet_cells(ROOT / EXCEL_WORKBOOK, "Dashboard")
+        selected = cells["O1"][1]
+        prior = f"{int(selected[:4]) - 1}{selected[4:]}"
+        with (ROOT / "data" / "crm_monthly.csv").open(encoding="utf-8-sig") as handle:
+            row = next(r for r in csv.DictReader(handle) if r["Month Key"] == prior)
+        self.assertEqual(cells["I9"][1], f"Previous Year  ₺{float(row['Pipeline Value']):,.0f}")
+        self.assertEqual(cells["M9"][1], f"Previous Year  {float(row['Win Rate']):.1%}")
+        self.assertEqual(set(PRIOR_YEAR_CAPTIONS), {"A9", "E9", "I9", "M9"})
+
+    def test_fabricated_prior_year_pipeline_and_win_rate_are_rejected(self) -> None:
+        # The workbook used to show pipeline / 1.12 and win rate - 1.5 points as "Previous Year".
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            self._rewrite_dashboard(
+                root,
+                (
+                    'IF(AB2="","Previous Year  n/a","Previous Year  ₺"&amp;TEXT(AB2,"#,##0"))'
+                    "</x:f><x:v>Previous Year  ₺22,106,000",
+                    '"Previous Year  ₺"&amp;TEXT(Y10/1.12,"#,##0")'
+                    "</x:f><x:v>Previous Year  ₺19,496,429",
+                ),
+                (
+                    'IF(AC2="","Previous Year  n/a","Previous Year  "&amp;TEXT(AC2,"0.0%"))'
+                    "</x:f><x:v>Previous Year  29.3%",
+                    '"Previous Year  "&amp;TEXT(Y16-1.5%,"0.0%")</x:f><x:v>Previous Year  30.8%',
+                ),
+            )
+
+            errors = validate_repository(root)
+
+            for ref in ("I9", "M9"):
+                self.assertTrue(
+                    any(e.startswith(f"Excel Dashboard!{ref}: previous-year") for e in errors),
+                    errors,
+                )
+                self.assertTrue(
+                    any(e.startswith(f"Excel Dashboard!{ref}: shows") for e in errors), errors
+                )
+            self.assertFalse(any("Dashboard!A9" in e or "Dashboard!E9" in e for e in errors))
+
+    def test_stale_prior_year_cached_value_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            self._rewrite_dashboard(
+                root, ("<x:v>Previous Year  ₺2,444,400</x:v>", "<x:v>Previous Year  ₺1</x:v>")
+            )
+
+            errors = validate_repository(root)
+
+            self.assertEqual(len(errors), 1, errors)
+            self.assertTrue(errors[0].startswith("Excel Dashboard!E9: shows 'Previous Year  ₺1'"))
+
     def test_missing_bi_artifacts_are_reported(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

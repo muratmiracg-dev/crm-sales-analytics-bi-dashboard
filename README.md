@@ -133,7 +133,9 @@ It also checks that lead-source and sales-rep breakdowns of **New Leads** and **
 sum back to the monthly totals (within 2%, 1% and 0.5% respectively), and prints a reconciliation
 report for every breakdown measure.
 Finally, it rejects any Power BI or reference DAX measure that adds up the month-end
-**Pipeline Value** snapshot across months (see *Pipeline Value is a snapshot* below).
+**Pipeline Value** snapshot across months (see *Pipeline Value is a snapshot* below), and
+checks that the Excel dashboard's four **Previous Year** captions show the same month one year
+earlier from the Monthly Data sheet (see *Excel previous-year comparisons* below).
 Pull requests run the validator and its regression tests on Python 3.11, 3.12 and 3.13,
 and CodeQL (security-extended queries) scans the Python code and the workflow files.
 
@@ -150,6 +152,16 @@ Run `python scripts/validate_data.py` to see the current figures.
 python scripts/validate_data.py
 python -m unittest discover -s tests -v
 ```
+
+### Excel previous-year comparisons
+
+The KPI Dictionary defines *Previous Year* as the same calendar month one year earlier. Until
+November 2026 the Excel dashboard followed that rule only for New Leads and Won Revenue: the
+Pipeline Value caption showed the current pipeline divided by 1.12 and the Win Rate caption the
+current win rate minus 1.5 points. For December 2026 it displayed TL 19,496,429 and 30.8%
+(implying +12% pipeline growth and a 1.5-point win-rate gain) while December 2025 was actually
+TL 22,106,000 and 29.3% (pipeline down 1.2%, win rate up 2.9 points). Both captions now look
+up the prior-year month, and all four show *n/a* for 2024 months, which have no prior year.
 
 ### Pipeline Value is a snapshot
 
