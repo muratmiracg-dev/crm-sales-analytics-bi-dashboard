@@ -269,6 +269,70 @@ def _bi_copy_errors(root: Path, canonical: dict[str, str]) -> list[str]:
     return errors
 
 
+# The Excel dashboard's "Previous Year" captions must show the same calendar month one year
+# earlier from the Monthly Data sheet (KPI Dictionary definition), not a figure derived from
+# the current month with a fixed factor such as ``Y10/1.12``.
+PRIOR_YEAR_CAPTIONS = {
+    "A9": ("New Leads", "{:,.0f}"),
+    "E9": ("Won Revenue", "₺{:,.0f}"),
+    "I9": ("Pipeline Value", "₺{:,.0f}"),
+    "M9": ("Win Rate", "{:.1%}"),
+}
+_LITERAL_ARITHMETIC = re.compile(r"[*/+\-]\s*\d")
+
+
+def _xlsx_sheet_cells(path: Path, sheet_name: str) -> dict[str, tuple[str | None, str | None]]:
+    """Map cell reference -> (formula, cached value) for one worksheet."""
+    with zipfile.ZipFile(path) as archive:
+        root = ElementTree.fromstring(archive.read(_xlsx_sheet_member(archive, sheet_name)))
+    cells = {}
+    for cell in root.iter(f"{{{_XLSX_NS['m']}}}c"):
+        cells[cell.get("r")] = (
+            cell.findtext("m:f", default=None, namespaces=_XLSX_NS),
+            cell.findtext("m:v", default=None, namespaces=_XLSX_NS),
+        )
+    return cells
+
+
+def _excel_prior_year_errors(root: Path, monthly: list[dict[str, str]]) -> list[str]:
+    workbook = root / EXCEL_WORKBOOK
+    if not workbook.is_file() or not monthly:
+        return []
+    try:
+        cells = _xlsx_sheet_cells(workbook, "Dashboard")
+    except (KeyError, zipfile.BadZipFile, ElementTree.ParseError) as exc:
+        return [f"{EXCEL_WORKBOOK.as_posix()}: cannot read sheet 'Dashboard' ({exc})"]
+    errors = []
+    selected = (cells.get("O1") or (None, None))[1]
+    by_month = {row["Month Key"]: row for row in monthly}
+    prior = None
+    if selected and _is_month_key(selected):
+        prior = by_month.get(f"{int(selected[:4]) - 1}{selected[4:]}")
+    for ref, (column, number_format) in PRIOR_YEAR_CAPTIONS.items():
+        formula, cached = cells.get(ref, (None, None))
+        where = f"Excel Dashboard!{ref}"
+        if not formula or "Previous Year" not in formula:
+            errors.append(f"{where}: expected a 'Previous Year' caption formula")
+            continue
+        body = re.sub(r'"[^"]*"', '""', formula)  # ignore literal text and number formats
+        if _LITERAL_ARITHMETIC.search(body):
+            errors.append(
+                f"{where}: previous-year {column} is derived from the current month with a "
+                "fixed factor; look up the same month one year earlier instead"
+            )
+        expected = (
+            "Previous Year  " + number_format.format(float(prior[column]))
+            if prior is not None
+            else None
+        )
+        if expected is not None and cached != expected:
+            errors.append(
+                f"{where}: shows {cached!r} but {column} for the same month one year "
+                f"before {selected} is {expected!r}"
+            )
+    return errors
+
+
 def _load_csv(path: Path) -> tuple[list[str], list[dict[str, str]]]:
     with path.open(encoding="utf-8-sig", newline="") as stream:
         reader = csv.DictReader(stream)
@@ -527,6 +591,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     }
     errors.extend(_bi_copy_errors(root, canonical_text))
     errors.extend(_snapshot_measure_errors(root))
+    errors.extend(_excel_prior_year_errors(root, datasets.get("crm_monthly.csv", [])))
     return errors
 
 
