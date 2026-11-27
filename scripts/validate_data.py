@@ -410,8 +410,31 @@ _LATEST_PERIOD = re.compile(
 )
 
 
-def _snapshot_measure_errors(root: Path) -> list[str]:
-    """Reject measures that aggregate a month-end snapshot column across months."""
+# Columns that are themselves per-row averages over won deals. AVERAGE() over them weights
+# every month (or rep-month) equally, so a quarter with few wins counts as much as a quarter
+# with many. Measures must weight them by the listed count column instead.
+WEIGHTED_AVERAGE_COLUMNS = {
+    "Sales Cycle Days": "Won Deals",
+}
+_PLAIN_AVERAGE = re.compile(r"AVERAGE(?:A)?\(\s*'?([A-Za-z_]+)'?\s*\[([^\]]+)\]\s*\)", re.IGNORECASE)
+
+
+def _weighted_average_errors(root: Path) -> list[str]:
+    """Reject measures that take an unweighted mean of a per-deal average column."""
+    measures, errors = _measures(root)
+    for source, name, expression in measures:
+        for table, column in _PLAIN_AVERAGE.findall(expression):
+            weight = WEIGHTED_AVERAGE_COLUMNS.get(column)
+            if weight:
+                errors.append(
+                    f"{source}: measure '{name}' averages {table}[{column}] without weights; "
+                    f"weight each row by {table}[{weight}]"
+                )
+    return errors
+
+
+def _measures(root: Path) -> tuple[list[tuple[str, str, str]], list[str]]:
+    """Every (source, measure, expression) in the semantic model and the DAX reference file."""
     measures: list[tuple[str, str, str]] = []
     model_path = root / POWER_BI_MODEL
     if model_path.is_file():
@@ -424,14 +447,19 @@ def _snapshot_measure_errors(root: Path) -> list[str]:
                         expression = "\n".join(expression)
                     measures.append((POWER_BI_MODEL.as_posix(), measure["name"], expression))
         except (KeyError, TypeError, ValueError) as exc:
-            return [f"{POWER_BI_MODEL.as_posix()}: cannot read measures ({exc})"]
+            return [], [f"{POWER_BI_MODEL.as_posix()}: cannot read measures ({exc})"]
     dax_path = root / MEASURES_FILE
     if dax_path.is_file():
         for line in dax_path.read_text(encoding="utf-8").splitlines():
             name, sep, expression = line.partition("=")
             if sep and not line.lstrip().startswith("//"):
                 measures.append((MEASURES_FILE.as_posix(), name.strip(), expression))
-    errors = []
+    return measures, []
+
+
+def _snapshot_measure_errors(root: Path) -> list[str]:
+    """Reject measures that aggregate a month-end snapshot column across months."""
+    measures, errors = _measures(root)
     for source, name, expression in measures:
         compact = re.sub(r"\s+", "", expression)
         for column in SNAPSHOT_COLUMNS:
@@ -591,6 +619,7 @@ def validate_repository(root: Path = ROOT) -> list[str]:
     }
     errors.extend(_bi_copy_errors(root, canonical_text))
     errors.extend(_snapshot_measure_errors(root))
+    errors.extend(_weighted_average_errors(root))
     errors.extend(_excel_prior_year_errors(root, datasets.get("crm_monthly.csv", [])))
     return errors
 

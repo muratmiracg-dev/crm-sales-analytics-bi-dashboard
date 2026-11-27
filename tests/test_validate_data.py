@@ -351,6 +351,27 @@ class DataContractTests(unittest.TestCase):
         self.assertIn("'KPI Pipeline Value' aggregates snapshot column", errors[0])
         self.assertIn("CRM_Measures.dax: measure 'Pipeline Value'", errors[1])
 
+    def test_unweighted_sales_cycle_average_is_rejected(self) -> None:
+        # Monthly Sales Cycle Days is already an average over that month's won deals; a plain
+        # AVERAGE() weights a 60-win month the same as a 120-win month.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            self._copy_datasets(root)
+            path = root / POWER_BI_MODEL
+            model = json.loads(path.read_text(encoding="utf-8"))
+            for table in model["model"]["tables"]:
+                for measure in table.get("measures", []):
+                    if measure["name"] == "Rep Sales Cycle Days":
+                        measure["expression"] = "AVERAGE( crm_rep_performance[Sales Cycle Days] )"
+            path.write_text(json.dumps(model, indent=2, ensure_ascii=False), encoding="utf-8")
+            (root / MEASURES_FILE).write_text(
+                "Sales Cycle Days = AVERAGE(crm_monthly[Sales Cycle Days])\n", encoding="utf-8"
+            )
+            errors = validate_repository(root)
+        self.assertEqual(len(errors), 2, errors)
+        self.assertIn("'Rep Sales Cycle Days' averages crm_rep_performance[Sales Cycle Days]", errors[0])
+        self.assertIn("CRM_Measures.dax: measure 'Sales Cycle Days'", errors[1])
+
     def test_reconciliation_report_covers_every_breakdown_measure(self) -> None:
         report = reconciliation_report(ROOT)
         measures = {(item["dataset"], item["measure"]) for item in report}

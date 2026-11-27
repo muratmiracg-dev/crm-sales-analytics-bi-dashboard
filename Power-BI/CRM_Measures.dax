@@ -19,7 +19,9 @@ Lead Qualification Rate = DIVIDE([Qualified Leads],[New Leads])
 Opportunity Conversion = DIVIDE([Opportunities],[Qualified Leads])
 Win Rate = DIVIDE([Won Deals],[Opportunities])
 Target Attainment = DIVIDE([Won Revenue],[Revenue Target])
-Sales Cycle Days = AVERAGE(crm_monthly[Sales Cycle Days])
+// Sales Cycle Days is the average age of the deals won in each month. Weight each month by its
+// won deals so a multi-month view averages over deals, not over months.
+Sales Cycle Days = DIVIDE(SUMX(crm_monthly, crm_monthly[Sales Cycle Days] * crm_monthly[Won Deals]), SUM(crm_monthly[Won Deals]))
 New Leads PY = CALCULATE([New Leads],DATEADD('Calendar'[Date],-1,YEAR))
 Won Revenue PY = CALCULATE([Won Revenue],DATEADD('Calendar'[Date],-1,YEAR))
 Leads YoY % = DIVIDE([New Leads]-[New Leads PY],[New Leads PY])

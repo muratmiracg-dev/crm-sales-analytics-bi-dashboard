@@ -339,7 +339,7 @@
           },
           {
             "name": "KPI Sales Cycle Days",
-            "expression": "AVERAGE(crm_monthly[Sales Cycle Days])",
+            "expression": "DIVIDE(SUMX(crm_monthly, crm_monthly[Sales Cycle Days] * crm_monthly[Won Deals]), SUM(crm_monthly[Won Deals]))",
             "formatString": "0.0",
             "lineageTag": "87e7c573-5f4d-44ae-ae2a-c250eea4dca3"
           },
@@ -533,7 +533,7 @@
           },
           {
             "name": "Rep Sales Cycle Days",
-            "expression": "AVERAGE(crm_rep_performance[Sales Cycle Days])",
+            "expression": "DIVIDE(SUMX(crm_rep_performance, crm_rep_performance[Sales Cycle Days] * crm_rep_performance[Won Deals]), SUM(crm_rep_performance[Won Deals]))",
             "formatString": "0.0",
             "lineageTag": "c1ae1639-1f6b-4540-9455-6da8947626ff"
           }
